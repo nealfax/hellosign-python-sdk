@@ -1,7 +1,0 @@
-setup.py
-hellosign-python-sdk/__init__.py
-hellosign_python_sdk.egg-info/PKG-INFO
-hellosign_python_sdk.egg-info/SOURCES.txt
-hellosign_python_sdk.egg-info/dependency_links.txt
-hellosign_python_sdk.egg-info/not-zip-safe
-hellosign_python_sdk.egg-info/top_level.txt
