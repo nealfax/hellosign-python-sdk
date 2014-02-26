@@ -16,7 +16,7 @@ def readme():
 			],
 
 			keywords='funniest joke comedy flying circus',
-			url='http://github.com/storborg/hellosign-python-sdk',
+			url='https://github.com/minhdanh/hellosign-python-sdk',
 			author='Minh Danh',
 			author_email='minhdanh@siliconstraits.vn',
 			license='MIT',
