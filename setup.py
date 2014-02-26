@@ -14,7 +14,9 @@ def readme():
 			'Programming Language :: Python :: 2.7',
 			'Topic :: Text Processing :: Linguistic',
 			],
-
+			entry_points = {
+			    'console_scripts': ['funniest-joke=funniest.command_line:main'],
+			},
 			keywords='funniest joke comedy flying circus',
 			url='https://github.com/minhdanh/hellosign-python-sdk',
 			author='Minh Danh',
@@ -26,5 +28,5 @@ def readme():
 			],
 			test_suite='nose.collector',
 			tests_require=['nose'],
-
+			include_package_data=True,
 			zip_safe=False)
