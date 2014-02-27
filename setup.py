@@ -24,7 +24,7 @@ def readme():
 			license='MIT',
 			packages=['hellosign-python-sdk'],
 			install_requires=[
-			'markdown',
+			'markdown', 'requests'
 			],
 			test_suite='nose.collector',
 			tests_require=['nose'],
