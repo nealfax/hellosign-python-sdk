@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
-import funniest
-print funniest.joke()
+from ..http.http_get_request import HttpGetRequest
+
+get_request = HttpGetRequest()
+print get_request.get_json_response('https://github.com/timeline.json')
 
