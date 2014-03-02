@@ -15,6 +15,8 @@ class Account(Resource):
 	# ACCOUNT_ROLE_CODE = "role_code";
 	# OAUTH_DATA = "oauth_data";
 	# ACCOUNT_PASSWORD = "password";
+	ACCOUNT_INFO_URL = 'https://api.hellosign.com/v3/account'
+	ACCOUNT_UPDATE_URL = 'https://api.hellosign.com/v3/account'
 
 	"""docstring for Account"""
 	# def __init__(self, arg):
@@ -23,11 +25,11 @@ class Account(Resource):
 
 	def get_info(self):
 		request = HSRequest()
-		response = request.get('https://api.hellosign.com/v3/account')
+		response = request.get(self.ACCOUNT_INFO_URL)
 		# TODO: update info using get & set
 		return response
 
 	def update_info(self):
 		request = HSRequest()
-		response = request.get_json_response('https://api.hellosign.com/v3/account')
+		response = request.post(self.ACCOUNT_UPDATE_URL)
 		return response
