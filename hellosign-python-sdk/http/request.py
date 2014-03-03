@@ -30,7 +30,7 @@ class HSRequest(object):
 	def get(self, url, headers=None, parameters=None):
 		response = requests.get(url, headers=self.headers, auth=self.auth)
 		response.encoding = self.DEFAULT_ENCODING
-		if self._check_error(response):
+		if self._has_no_error(response):
 			return response.json()
 
 	def get_file(self, url, filename):
@@ -41,7 +41,7 @@ class HSRequest(object):
 			raise
 		response = requests.get(url, headers=self.headers, auth=self.auth)
 		response.encoding = self.DEFAULT_ENCODING
-		if self._check_error(response):
+		if self._has_no_error(response):
 			temp.write(response.content)
 			temp.close()
 			return temp
@@ -49,7 +49,7 @@ class HSRequest(object):
 
 	def post(self, url, data):
 		response = requests.post(url, headers=self.headers, data=data, auth=self.auth)
-		if self._check_error(response):
+		if self._has_no_error(response):
 			return response.json()
 
 	def _authenticate(self):
@@ -62,7 +62,7 @@ class HSRequest(object):
 		else:
 			raise NoAuthMethod("No Authentication Information Found!")
 
-	def _check_error(self, response):
+	def _has_no_error(self, response):
 		# If status code is 4xx or 5xx, that should be an error
 		if response.status_code >= 400:
 			raise HTTPError(str(response.status_code) + " error: " + response.json()["error"]["error_msg"])

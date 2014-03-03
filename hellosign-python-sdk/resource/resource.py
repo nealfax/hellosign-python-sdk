@@ -20,17 +20,22 @@ class Resource(object):
 				object.__setattr__(self, 'json_data', json.loads(json.dumps(jsonstr)))				
 
 	def __getattr__(self, name):
-		if name in self.json_data:
-			return self.json_data[name]
+		if name != "json_data":
+			if name in self.json_data:
+				return self.json_data[name]
+			else:
+				raise AttributeError
 		else:
-			raise AttributeError
+			return self.json_data
 
 	def __setattr__(self, name, value):
-		if name in self.json_data:
-			self.json_data[name] = value
+		if name != "json_data":
+			if name in self.json_data:
+				self.json_data[name] = value
+			else:
+				raise AttributeError
 		else:
-			raise AttributeError
-
+			self.__dict__["json_data"] = value
 	# @abstractmethod
 	# def say_something(self):
 	# 	raise NotImplementedError()
