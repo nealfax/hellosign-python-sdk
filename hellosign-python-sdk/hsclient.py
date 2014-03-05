@@ -1,6 +1,8 @@
 from http.request import HSRequest
 from resource.account import Account
 from resource.signature_request import SignatureRequest
+from resource.reusable_form import ReusableForm
+from resource.team import Team
 
 
 class HSClient(object):
@@ -21,6 +23,12 @@ class HSClient(object):
 
     REUSABLE_FORM_GET_URL = 'https://api.hellosign.com/v3/reusable_form/'
     REUSABLE_FORM_GET_LIST_URL = 'https://api.hellosign.com/v3/reusable_form/list'
+
+    TEAM_INFO_URL = 'https://api.hellosign.com/v3/team'
+    TEAM_CREATE_URL = 'https://api.hellosign.com/v3/team/create'
+    TEAM_UPDATE_URL = 'https://api.hellosign.com/v3/team'
+    TEAM_DESTROY_URL = 'https://api.hellosign.com/v3/team/destroy'
+    TEAM_ADD_MEMBER_URL = 'https://api.hellosign.com/v3/team/add_member'
 
     # TODO: Put api account in HSClient's __init__ function instead of
     # HSRequest
@@ -95,7 +103,50 @@ class HSClient(object):
         response = request.get(self.REUSABLE_FORM_GET_URL + reusable_form_id)
         return ReusableForm(response["reusable_form"])
 
+    # TODO: return the total results (in another function, variable...)
+
     def get_reusable_form_list(self, page=1):
+        rf_list = []
         request = HSRequest()
-        response = request.get(self.REUSABLE_FORM_GET_LIST_URL, parameters={"page": page})
-        # TODO: process the response and return a list of ReusableForm
+        response = request.get(
+            self.REUSABLE_FORM_GET_LIST_URL, parameters={"page": page})
+        print response
+        for reusable_form in response["reusable_forms"]:
+            rf_list.append(ReusableForm(reusable_form))
+        return rf_list
+
+    def get_team_info(self):
+        request = HSRequest()
+        response = request.get(self.TEAM_INFO_URL)
+        return Team(response["team"])
+
+    def create_team(self, name):
+        request = HSRequest()
+        response = request.post(self.TEAM_CREATE_URL, {"name": name})
+        return Team(response["team"])
+
+    # TODO: consider moving this function to Team class, or return something else (true, false, etc...)
+    # The api event create a new team if you do not belong to any team
+    def update_team_name(self, name):
+        request = HSRequest()
+        response = request.post(self.TEAM_UPDATE_URL, {"name": name})
+        print response
+
+    # TODO: return True or False
+    def destroy_team(self):
+        request = HSRequest()
+        request.post(self.TEAM_DESTROY_URL)
+        return True
+
+    # TODO: move this function to Team object (class)
+    def add_team_member(self, email_address=None, account_id=None):
+        if (email_address is None and account_id is None):
+            raise HSException("No email address or account_id specified")
+        request = HSRequest()
+        data = {}
+        if account_id is not None:
+            data = {"account_id": account_id}
+        else:
+            data = {"email_address": email_address}
+        response = request.post(self.TEAM_ADD_MEMBER_URL, data)
+        print response

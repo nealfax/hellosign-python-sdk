@@ -41,9 +41,10 @@ class HSRequest(object):
             with os.fdopen(fd, "w+b") as f:
                 f.write(response.content)
 
-    def post(self, url, data):
+    def post(self, url, data={}):
         response = requests.post(
             url, headers=self.headers, data=data, auth=self.auth)
+        print response.text
         if self._has_no_error(response):
             return response.json()
 
