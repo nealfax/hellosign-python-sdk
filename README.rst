@@ -1,4 +1,4 @@
-Hellosin Python SDK
+Hellosign Python SDK
 -------------------
 
 To be updated...
