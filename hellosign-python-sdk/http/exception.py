@@ -13,3 +13,10 @@ class NoAuthMethod(HSException):
 
 class HTTPError(HSException):
     """docstring for HTTPError"""
+
+
+class InvalidEmail(HSException):
+    """docstring for InvalidEmail"""
+
+class EmptyPassword(HSException):
+    """docstring for EmptyPassword"""

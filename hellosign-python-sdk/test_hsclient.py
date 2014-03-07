@@ -13,11 +13,12 @@ client = HSClient()
 # print client.account.email_address # print minhdanh@siliconstraits.vn
 
 # SignatureRequest
-# client.create_account("tranthienthanh@gmail.com", "abczyxll00348")
+client.create_account("tranthienthanh@gmail.com", "abczyxll00348")
+client.create_account("@gmail.com", "abczyxll00348") # invalidemail
 #sr = client.get_signature_request("7bf722477992c7fe445da9b46b71fd7a53885fab")
 #print sr.requester_email_address  # o0Khoiclub0o@yahoo.com`
-sr_list = client.get_signature_request_list()
-print sr_list[0].signatures[0]  # True
+# sr_list = client.get_signature_request_list()
+# print sr_list[0].signatures[0]  # True
 # download file
 # client.get_signature_request_file("7bf722477992c7fe445da9b46b71fd7a53885fab", "file.pdf") # file.pdf
 # client.get_signature_request_final_copy("7bf722477992c7fe445da9b46b71fd7a53885fab", "file2.pdf") # file.pdf

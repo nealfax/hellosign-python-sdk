@@ -1,10 +1,11 @@
 from http.request import HSRequest
-from http.exception import HSException
+from http.exception import *
 from resource.account import Account
 from resource.signature_request import SignatureRequest
 from resource.reusable_form import ReusableForm
 from resource.team import Team
 from resource.unclaimed_draft import UnclaimedDraft
+import http.utils as utils
 
 
 class HSClient(object):
@@ -50,11 +51,12 @@ class HSClient(object):
         self.get_account_info()
 
     def create_account(self, email, password):
-        # TODO: make the check exceptions
         if email is None:
-            print("Email is not valid")
+            raise InvalidEmail("Email cannot be empty")
+        elif not utils.is_email(email):
+            raise InvalidEmail("Email is not valid")
         if password is None:
-            print("Password is not valid")
+            raise EmptyPassword("Password cannot be empty")
         request = HSRequest()
         response = request.post(self.ACCOUNT_CREATE_URL, {
                                 'email_address': email, 'password': password})
