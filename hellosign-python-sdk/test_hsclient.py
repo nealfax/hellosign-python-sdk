@@ -1,4 +1,5 @@
 from hsclient import HSClient
+from resource.unclaimed_draft import UnclaimedDraft
 
 client = HSClient()
 # Account
@@ -15,8 +16,8 @@ client = HSClient()
 # client.create_account("tranthienthanh@gmail.com", "abczyxll00348")
 #sr = client.get_signature_request("7bf722477992c7fe445da9b46b71fd7a53885fab")
 #print sr.requester_email_address  # o0Khoiclub0o@yahoo.com`
-#sr_list = client.get_signature_request_list()
-#print sr_list[0].test_mode  # True
+sr_list = client.get_signature_request_list()
+print sr_list[0].signatures[0]  # True
 # download file
 # client.get_signature_request_file("7bf722477992c7fe445da9b46b71fd7a53885fab", "file.pdf") # file.pdf
 # client.get_signature_request_final_copy("7bf722477992c7fe445da9b46b71fd7a53885fab", "file2.pdf") # file.pdf
@@ -40,3 +41,50 @@ client = HSClient()
 # client.add_team_member("anhduy@siliconstraits.vn") # ok
 # 10
 # client.add_team_member("anhduy@siliconstraits.vn") # error
+# 11
+# client.remove_team_member("anhduy@siliconstraits.vn")
+
+# # 12
+# files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
+# # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
+# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
+# cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
+
+# print client.send_signature_request("1", files, "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
+# 13 TODO: test create with reusable_form_id
+#14 reminder
+# client.remind_signature_request("ba9e7d19133c9a369ee35bafb1bb23942580994e", "minhdanh@siliconstraits.vn")
+#15 cancel
+# client.cancel_signature_request("ba9e7d19133c9a369ee35bafb1bb23942580994e")
+# 16
+
+# files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
+# # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
+# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
+# cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
+# # TODO: use a valid client_id
+# print client.send_signature_request_embedded("1", "b6b8e7deaf8f0b95c029dca049356d4a2cf9710a", files, "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
+# 17 TODO: test create with reusable_form_id
+
+# Test ReusableForm
+#18
+# rl = client.get_reusable_form_list()
+# for rf in rl:
+# 	print rf.reusable_form_id
+# 19 get reusable_form_id
+# rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
+# print rf.reusable_form_id
+# 20
+# print client.add_user_to_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e", email_address="dinhkhoi@siliconstraits.vn").reusable_form_id
+# print client.remove_user_from_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e", email_address="dinhkhoi@siliconstraits.vn")
+
+# Test UnclaimedDraft
+# 21
+
+# files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
+# # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
+# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
+# cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
+
+# a = client.create_unclaimed_draft("1", files, UnclaimedDraft.UNCLAIMED_DRAFT_REQUEST_SIGNATURE_TYPE , "Test unclaimed draft", "Please do not reploy to the messages", signers, cc_email_addresses)
+# print a.claim_url

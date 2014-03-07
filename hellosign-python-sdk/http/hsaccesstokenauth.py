@@ -1,6 +1,8 @@
 from requests.auth import AuthBase
 
+
 class HSAccessTokenAuth(AuthBase):
+
     def __init__(self, access_token, access_token_type):
         # setup any auth-related data here
         self.access_token = access_token
@@ -8,5 +10,6 @@ class HSAccessTokenAuth(AuthBase):
 
     def __call__(self, r):
         # modify and return the request
-        r.headers['Authorization'] = self.access_token_type + ' ' + self.access_token
+        r.headers['Authorization'] = self.access_token_type + \
+            ' ' + self.access_token
         return r
