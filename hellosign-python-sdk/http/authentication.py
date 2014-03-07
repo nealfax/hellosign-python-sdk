@@ -1,7 +1,3 @@
-import os
-import requests
-
-
 class Authentication(object):
 
     email = ""
@@ -17,4 +13,3 @@ class Authentication(object):
             print("Password cannot be null")
         self.email = email
         self.password = password
-

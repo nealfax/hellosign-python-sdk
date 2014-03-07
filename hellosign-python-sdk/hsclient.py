@@ -145,8 +145,10 @@ class HSClient(object):
         signers_payload = {}
         for signer in signers:
             # print signer
-            # signer: {"rolename": "Role Name", "name": "Name", "email_address": "email@email.email"}
-            signers_payload["signers[" + signer["role_name"] + "][name]"] = signer["name"]
+            # signer: {"rolename": "Role Name", "name": "Name",
+            # "email_address": "email@email.email"}
+            signers_payload[
+                "signers[" + signer["role_name"] + "][name]"] = signer["name"]
             signers_payload["signers[" + signer["role_name"] + "][email_address]"] = signer[
                 "email_address"]
             if "pin" in signer:
@@ -155,7 +157,8 @@ class HSClient(object):
 
         ccs_payload = {}
         for cc in ccs:
-            # cc_emaiL_address: {"email_address": "email@email.email", "role_name": "Role Name"}
+            # cc_emaiL_address: {"email_address": "email@email.email",
+            # "role_name": "Role Name"}
             ccs_payload[
                 "ccs[" + cc["role_name"] + "]"] = cc["email_address"]
         custom_fields_payload = {}
@@ -172,21 +175,25 @@ class HSClient(object):
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
         request = HSRequest()
-        response = request.post(self.SIGNATURE_REQUEST_CREATE_WITH_RF_URL, data=dict(payload.items() + signers_payload.items() + ccs_payload.items() + custom_fields_payload.items()))
+        response = request.post(self.SIGNATURE_REQUEST_CREATE_WITH_RF_URL, data=dict(
+            payload.items() + signers_payload.items() + ccs_payload.items() + custom_fields_payload.items()))
         return SignatureRequest(response["signature_request"])
 
     def remind_signature_request(self, signature_request_id, email_address):
         request = HSRequest()
-        response = request.post(self.SIGNATURE_REQUEST_REMIND_URL + signature_request_id, data={"email_address": email_address})
+        response = request.post(self.SIGNATURE_REQUEST_REMIND_URL +
+                                signature_request_id, data={"email_address": email_address})
         return SignatureRequest(response["signature_request"])
 
     # TODO: return True or False
     def cancel_signature_request(self, signature_request_id):
         request = HSRequest()
-        response = request.post(self.SIGNATURE_REQUEST_CANCEL_URL + signature_request_id)
+        response = request.post(
+            self.SIGNATURE_REQUEST_CANCEL_URL + signature_request_id)
         return True
 
-    # TODO: refactor the code to use the same logic with send_signature_request()
+    # TODO: refactor the code to use the same logic with
+    # send_signature_request()
     def send_signature_request_embedded(self, test_mode="0", client_id=None, files=None, title=None, subject=None, message=None, signing_redirect_url=None, signers=None, cc_email_addresses=None, form_fields_per_document=None):
 
         files_payload = {}
@@ -219,15 +226,17 @@ class HSClient(object):
 
         request = HSRequest()
         response = request.post(self.SIGNATURE_REQUEST_CREATE_EMBEDDED_URL, data=dict(payload.items() + signers_payload.items()
-                                                         + cc_email_addresses_payload.items()), files=files_payload)
+                                                                                      + cc_email_addresses_payload.items()), files=files_payload)
         return SignatureRequest(response["signature_request"])
 
     def send_signature_request_embedded_with_rf(self, test_mode="0", client_id=None, reusable_form_id=None, title=None, subject=None, message=None, signing_redirect_url=None, signers=None, ccs=None, custom_fields=None):
         signers_payload = {}
         for signer in signers:
             # print signer
-            # signer: {"rolename": "Role Name", "name": "Name", "email_address": "email@email.email"}
-            signers_payload["signers[" + signer["role_name"] + "][name]"] = signer["name"]
+            # signer: {"rolename": "Role Name", "name": "Name",
+            # "email_address": "email@email.email"}
+            signers_payload[
+                "signers[" + signer["role_name"] + "][name]"] = signer["name"]
             signers_payload["signers[" + signer["role_name"] + "][email_address]"] = signer[
                 "email_address"]
             if "pin" in signer:
@@ -236,7 +245,8 @@ class HSClient(object):
 
         ccs_payload = {}
         for cc in ccs:
-            # cc_emaiL_address: {"email_address": "email@email.email", "role_name": "Role Name"}
+            # cc_emaiL_address: {"email_address": "email@email.email",
+            # "role_name": "Role Name"}
             ccs_payload[
                 "ccs[" + cc["role_name"] + "]"] = cc["email_address"]
         custom_fields_payload = {}
@@ -253,7 +263,8 @@ class HSClient(object):
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
         request = HSRequest()
-        response = request.post(self.SIGNATURE_REQUEST_CREATE_WITH_RF_URL, data=dict(payload.items() + signers_payload.items() + ccs_payload.items() + custom_fields_payload.items()))
+        response = request.post(self.SIGNATURE_REQUEST_CREATE_WITH_RF_URL, data=dict(
+            payload.items() + signers_payload.items() + ccs_payload.items() + custom_fields_payload.items()))
         return SignatureRequest(response["signature_request"])
 
     def get_reusable_form(self, reusable_form_id):
@@ -285,10 +296,12 @@ class HSClient(object):
         else:
             data = {"email_address": email_address}
         request = HSRequest()
-        response = request.post(self.REUSABLE_FORM_ADD_USER_URL + reusable_form_id, data)
+        response = request.post(
+            self.REUSABLE_FORM_ADD_USER_URL + reusable_form_id, data)
         return ReusableForm(response["reusable_form"])
 
-    # TODO: consider merging add & remove into one function, or using some same code...
+    # TODO: consider merging add & remove into one function, or using some
+    # same code...
     def remove_user_from_reusable_form(self, reusable_form_id, account_id=None, email_address=None):
         if (email_address is None and account_id is None):
             raise HSException("No email address or account_id specified")
@@ -299,7 +312,8 @@ class HSClient(object):
         else:
             data = {"email_address": email_address}
         request = HSRequest()
-        response = request.post(self.REUSABLE_FORM_REMOVE_USER_URL + reusable_form_id, data)
+        response = request.post(
+            self.REUSABLE_FORM_REMOVE_USER_URL + reusable_form_id, data)
         return ReusableForm(response["reusable_form"])
 
     def get_team_info(self):
@@ -326,7 +340,9 @@ class HSClient(object):
         return True
 
     # TODO: move this function to Team object (class)
-    # TODO: return some int values for diffrent results: eg,: 1 success, 0: fail, -1: user has been added before... (or use exceptions for handling this later...)
+    # TODO: return some int values for diffrent results: eg,: 1 success, 0:
+    # fail, -1: user has been added before... (or use exceptions for handling
+    # this later...)
     def add_team_member(self, email_address=None, account_id=None):
         if (email_address is None and account_id is None):
             raise HSException("No email address or account_id specified")
@@ -373,7 +389,8 @@ class HSClient(object):
                 if "name" not in signer and "email_address" not in signer:
                     raise HSException("Signer's name and email are required")
                 else:
-                    signers_payload["signers[" + str(idx) + "][name]"] = signer["name"]
+                    signers_payload[
+                        "signers[" + str(idx) + "][name]"] = signer["name"]
                     signers_payload["signers[" + str(idx) + "][email_address]"] = signer[
                         "email_address"]
             if "order" in signer:
@@ -392,6 +409,5 @@ class HSClient(object):
 
         request = HSRequest()
         response = request.post(self.UNCLAIMED_DRAFT_CREATE_URL, data=dict(payload.items() + signers_payload.items()
-                                                         + cc_email_addresses_payload.items()), files=files_payload)
+                                                                           + cc_email_addresses_payload.items()), files=files_payload)
         return UnclaimedDraft(response["unclaimed_draft"])
-
