@@ -1,9 +1,11 @@
 nguage: python
-python:
-  - "2.6"
-  - "2.7"
+env:
+  - TOXENV=py26
+  - TOXENV=py27
 # command to install dependencies
 # install: "pip install -r requirements.txt"
-install: "pip install nose"
+install:
+  - "pip install nose"
+  - "pip install requests"
 # # command to run tests
 script: nosetests
