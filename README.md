@@ -4,6 +4,8 @@ Hellosign Python SDK
 
 An API wrapper written in Python to interact with HelloSign's API (http://www.hellosign.com)
 
+Note: This is not the final Readme, and the package is not ready.
+
 ## Installation
 
 Install using `easy_install`:
