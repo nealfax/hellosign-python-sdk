@@ -41,4 +41,14 @@ client = HSClient(api_key="your_api_key")
 
 client = HSClient(api_accesstoken="your_api_access_token", api_accesstokentype="your_api_access_token_type")
 ````
-Note: In case you initialize the HSClient with all the above credentials, the order will be as follow: api_accesstoken & api_accesstokentype, api_key, then api_email and api_password
+Note: In case you initialize the HSClient with all the above credentials, the priority order is as follow: api_accesstoken & api_accesstokentype, api_key, then api_email and api_password
+
+## Usage
+
+### Account
+
+#### Get current account information
+
+````python
+client.get_account_info()
+````
