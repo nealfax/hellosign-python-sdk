@@ -1,6 +1,6 @@
 Hellosign Python SDK
 -------------------
-[![Build Status](https://travis-ci.org/minhdanh/hellosign-python-sdk.png?branch=master)](https://travis-ci.org/minhdanh/hellosign-python-sdk) [![Coverage Status](https://coveralls.io/repos/minhdanh/hellosign-python-sdk/badge.png)](https://coveralls.io/r/minhdanh/hellosign-python-sdk)
+[![Build Status](https://travis-ci.org/minhdanh/hellosign-python-sdk.png?branch=master)](https://travis-ci.org/minhdanh/hellosign-python-sdk) [![Coverage Status](https://coveralls.io/repos/minhdanh/hellosign-python-sdk/badge.png)](https://coveralls.io/r/minhdanh/hellosign-python-sdk) [![Code Health](https://landscape.io/github/minhdanh/hellosign-python-sdk/master/landscape.png)](https://landscape.io/github/minhdanh/hellosign-python-sdk/master)
 
 An API wrapper written in Python to interact with HelloSign's API (http://www.hellosign.com)
 

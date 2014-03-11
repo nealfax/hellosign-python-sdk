@@ -8,6 +8,9 @@ install:
   #- "pip install nose"
   #- "pip install requests"
   - "python setup.py -q install"
+  - "pip install -r test_requirements.txt"
 # # command to run tests
 script:
   - "python setup.py test"
+after_success:
+  - coveralls
