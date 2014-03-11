@@ -1,6 +1,6 @@
 Hellosign Python SDK
 -------------------
-[![Build Status](https://travis-ci.org/minhdanh/hellosign-python-sdk.png?branch=master)](https://travis-ci.org/minhdanh/hellosign-python-sdk) [![Coverage Status](https://coveralls.io/repos/minhdanh/hellosign-python-sdk/badge.png)](https://coveralls.io/r/minhdanh/hellosign-python-sdk) [![Code Health](https://landscape.io/github/minhdanh/hellosign-python-sdk/master/landscape.png)](https://landscape.io/github/minhdanh/hellosign-python-sdk/master) [![Latest Version](https://pypip.in/v/hellosign-python-sdk/badge.png)](https://pypi.python.org/pypi/hellosign-python-sdk/) [![Downloads](https://pypip.in/d/hellosign-python-sdk/badge.png)](https://pypi.python.org/pypi/hellosign-python-sdk/)
+[![Build Status](https://travis-ci.org/minhdanh/hellosign-python-sdk.png?branch=master)](https://travis-ci.org/minhdanh/hellosign-python-sdk) [![Coverage Status](https://coveralls.io/repos/minhdanh/hellosign-python-sdk/badge.png)](https://coveralls.io/r/minhdanh/hellosign-python-sdk) [![Code Health](https://landscape.io/github/minhdanh/hellosign-python-sdk/master/landscape.png)](https://landscape.io/github/minhdanh/hellosign-python-sdk/master) [![Latest Version](https://pypip.in/v/hellosign-python-sdk/badge.png)](https://pypi.python.org/pypi/hellosign-python-sdk/) [![Downloads](https://pypip.in/d/hellosign-python-sdk/badge.png)](https://pypi.python.org/pypi/hellosign-python-sdk/) [![Dependency Status](https://gemnasium.com/minhdanh/hellosign-python-sdk.png)](https://gemnasium.com/minhdanh/hellosign-python-sdk)
 
 
 
