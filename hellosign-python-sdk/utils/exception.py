@@ -1,4 +1,10 @@
 class HSException(Exception):
+    """General exception class
+
+    We use this object to raise exceptions when none of its child classes is
+    suitable for use.
+
+    """
 
     def __init__(self, value):
         self.value = value
@@ -8,16 +14,16 @@ class HSException(Exception):
 
 
 class NoAuthMethod(HSException):
-    """docstring for NoAuthMethod"""
+    """Exception when no authentication information found"""
 
 
 class HTTPError(HSException):
-    """docstring for HTTPError"""
+    """Exception when an HTTP error found"""
 
 
 class InvalidEmail(HSException):
-    """docstring for InvalidEmail"""
+    """Exception when an email address is invalid"""
 
 
 class EmptyPassword(HSException):
-    """docstring for EmptyPassword"""
+    """Exception when a password is empty"""
