@@ -15,17 +15,14 @@ setup(name='hellosign-python-sdk',
       'Programming Language :: Python :: 2.7',
       'Topic :: Text Processing :: Linguistic',
       ],
-      entry_points={
-      'console_scripts': ['funniest-joke=funniest.command_line:main'],
-      },
-      keywords='funniest joke comedy flying circus',
+      keywords='hellosign python sdk',
       url='https://github.com/minhdanh/hellosign-python-sdk',
       author='Minh Danh',
       author_email='minhdanh@siliconstraits.vn',
       license='MIT',
       packages=['hellosign-python-sdk'],
       install_requires=[
-      'markdown', 'requests'
+      'requests'
       ],
       test_suite='nose.collector',
       tests_require=['nose'],
