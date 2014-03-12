@@ -25,8 +25,8 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # rf_list = client.get_reusable_form_list()
 # print rf_list[0].reusable_form_id # print 85185eeafa15704ce7be1a9d5e911c2366f5313e
 # 4
-# rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
-# print rf.documents
+rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
+print rf.signer_roles[0]['name']
 # 5
 # a = client.get_team_info()
 # print a.accounts
@@ -93,5 +93,5 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
 # cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
 
-a = client.create_unclaimed_draft("1", files, [], UnclaimedDraft.UNCLAIMED_DRAFT_REQUEST_SIGNATURE_TYPE , "Test unclaimed draft", "Please do not reploy to the messages", signers, cc_email_addresses)
-print a.claim_url
+# a = client.create_unclaimed_draft("1", files, [], UnclaimedDraft.UNCLAIMED_DRAFT_REQUEST_SIGNATURE_TYPE , "Test unclaimed draft", "Please do not reploy to the messages", signers, cc_email_addresses)
+# print a.claim_url
