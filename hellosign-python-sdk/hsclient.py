@@ -327,7 +327,7 @@ class HSClient(object):
         else:
             raise NoAuthMethod("No authentication information found!")
 
-    def _check_required_fields(self, fields={}, either_fields=None):
+    def _check_required_fields(self, fields=None, either_fields=None):
         for key, value in fields.iteritems():
             # If value is a dict, one of the fields in the dict is required ->
             # exception if all are None

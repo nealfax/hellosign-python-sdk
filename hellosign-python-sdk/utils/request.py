@@ -29,7 +29,7 @@ class HSRequest(object):
     def __init__(self, auth):
         self.auth = auth
 
-    def get(self, url, headers={}, parameters={}):
+    def get(self, url, headers=None, parameters=None):
         """Send a GET request with custome headers and parameters
 
         Args:
@@ -50,7 +50,7 @@ class HSRequest(object):
         self._check_error(response)
         return response.json()
 
-    def get_file(self, url, filename, headers={}):
+    def get_file(self, url, filename, headers=None):
         """Get a file from a url and save it as `filename`
 
         Args:
@@ -77,7 +77,7 @@ class HSRequest(object):
             return False
         return True
 
-    def post(self, url, data={}, files=None, headers={}):
+    def post(self, url, data=None, files=None, headers=None):
         """Make POST request to a url
 
         Args:
