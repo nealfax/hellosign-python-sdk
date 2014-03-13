@@ -42,10 +42,14 @@ class HSRequest(object):
 
         """
 
-        response = requests.get(
-            url, headers=dict(self.headers.items() + headers.items()),
-            params=dict(self.parameters.items() + parameters.items()),
-            auth=self.auth)
+        get_headers = self.headers
+        get_parameters = self.parameters
+        if headers is not None:
+            get_headers.update(headers)
+        if parameters is not None:
+            get_parameters.update(parameters)
+        response = requests.get(url, headers=get_headers, params=get_parameters,
+                                auth=self.auth)
         self.http_status_code = response.status_code
         self._check_error(response)
         return response.json()
@@ -65,8 +69,10 @@ class HSRequest(object):
 
         """
 
-        response = requests.get(url, headers=dict(self.headers.items() +
-                                headers.items()), auth=self.auth)
+        get_headers = self.headers
+        if headers is not None:
+            get_headers.update(headers)
+        response = requests.get(url, headers=get_headers, auth=self.auth)
         self.http_status_code = response.status_code
         try:
             self._check_error(response)
@@ -91,9 +97,11 @@ class HSRequest(object):
 
         """
 
-        response = requests.post(
-            url, headers=dict(self.headers.items() + headers.items()),
-            data=data, auth=self.auth, files=files)
+        post_headers = self.headers
+        if headers is not None:
+            post_headers.update(headers)
+        response = requests.post(url, headers=post_headers, data=data,
+                                 auth=self.auth, files=files)
         self.http_status_code = response.status_code
         self._check_error(response)
         return response.json()
