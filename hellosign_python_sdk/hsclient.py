@@ -13,7 +13,12 @@ from utils.hsaccesstokenauth import HSAccessTokenAuth
 
 class HSClient(object):
 
-    """docstring for HSClient"""
+    """Client object to interact with the API urls
+
+    Most of the operations of the SDK is made through this object. Please refer
+    to the README.rst file for more details on how to use the client object.
+    """
+
     API_VERSION = 'v3'
     API_URL = 'https://api.hellosign.com/' + API_VERSION
 
@@ -50,9 +55,6 @@ class HSClient(object):
     TEAM_DESTROY_URL = API_URL + '/team/destroy'
     TEAM_ADD_MEMBER_URL = API_URL + '/team/add_member'
     TEAM_REMOVE_MEMBER_URL = API_URL + '/team/remove_member'
-
-    # TODO: Put api account in HSClient's __init__ function instead of
-    # HSRequest
 
     def __init__(self, api_email=None, api_password=None, api_key=None,
                  api_accesstoken=None, api_accesstokentype=None):
@@ -142,7 +144,6 @@ class HSClient(object):
             cc_email_addresses=cc_email_addresses,
             form_fields_per_document=form_fields_per_document)
 
-    # TODO: check and raise exceptions when required fields are empty
     def send_signature_request_with_rf(
             self, test_mode="0", reusable_form_id=None, title=None,
             subject=None, message=None, signing_redirect_url=None,

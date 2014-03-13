@@ -1,4 +1,8 @@
 from setuptools import setup
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__),
+                                'hellosign-python-sdk'))
 
 
 def readme():
@@ -7,7 +11,8 @@ def readme():
 
 setup(name='hellosign-python-sdk',
       version='0.1.1',
-      description='An API wrapper written in Python to interact with HelloSign\'s API (http://www.hellosign.com)',
+      description="An API wrapper written in Python to interact with \
+            HelloSign's API (http://www.hellosign.com)",
       long_description=readme(),
       classifiers=[
       'Development Status :: 3 - Alpha',
