@@ -1,5 +1,5 @@
 import json
-from abc import ABCMeta, abstractmethod
+#from abc import ABCMeta, abstractmethod
 
 
 class Resource(object):
@@ -12,7 +12,7 @@ class Resource(object):
 
     """
 
-    __metaclass__ = ABCMeta
+    # __metaclass__ = ABCMeta
     json_data = None
 
     def __init__(self, jsonstr=None, key=None):

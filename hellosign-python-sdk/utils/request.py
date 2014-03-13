@@ -43,7 +43,9 @@ class HSRequest(object):
         """
 
         response = requests.get(
-            url, headers=dict(self.headers.items() + headers.items()), params=dict(self.parameters.items() + parameters.items()), auth=self.auth)
+            url, headers=dict(self.headers.items() + headers.items()),
+            params=dict(self.parameters.items() + parameters.items()),
+            auth=self.auth)
         self.http_status_code = response.status_code
         self._check_error(response)
         return response.json()
@@ -63,7 +65,8 @@ class HSRequest(object):
 
         """
 
-        response = requests.get(url, headers=dict(self.headers.items() + headers.items()), auth=self.auth)
+        response = requests.get(url, headers=dict(self.headers.items() +
+                                headers.items()), auth=self.auth)
         self.http_status_code = response.status_code
         try:
             self._check_error(response)
@@ -89,12 +92,14 @@ class HSRequest(object):
         """
 
         response = requests.post(
-            url, headers=dict(self.headers.items() + headers.items()), data=data, auth=self.auth, files=files)
+            url, headers=dict(self.headers.items() + headers.items()),
+            data=data, auth=self.auth, files=files)
         self.http_status_code = response.status_code
         self._check_error(response)
         return response.json()
 
-    # TODO: use a expected key in returned json, if the returned key does not match, return false...
+    # TODO: use a expected key in returned json, if the returned key does not
+    # match, return false...
     def _check_error(self, response):
         """Check for HTTP error code from the response, raise exception if
         there's any
@@ -112,7 +117,8 @@ class HSRequest(object):
 
         # If status code is 4xx or 5xx, that should be an error
         if response.status_code >= 400:
-            # I intended to return False here but raising a meaningful exception may make senses more.
+            # I intended to return False here but raising a meaningful exception
+            # may make senses more.
             raise HTTPError(str(response.status_code) +
                             " error: " + response.json()["error"]["error_msg"])
         # Return True if everything looks OK
