@@ -8,6 +8,7 @@ from resource.embedded import Embedded
 from resource.unclaimed_draft import UnclaimedDraft
 import utils.utils as utils
 from requests.auth import HTTPBasicAuth
+from utils.hsaccesstokenauth import HSAccessTokenAuth
 
 
 class HSClient(object):
