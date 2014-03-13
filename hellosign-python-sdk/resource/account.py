@@ -24,6 +24,8 @@ class Account(Resource):
     Examples:
         To print the account_id
 
+        >>> client = HSClient()
+        >>> account = client.get_account_info()
         >>> print account.account_id
 
     """

@@ -1,6 +1,6 @@
 import os
 import requests
-from exception import *
+from exception import HTTPError
 
 
 class HSRequest(object):

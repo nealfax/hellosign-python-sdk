@@ -4,10 +4,10 @@ from resource.account import Account
 from resource.signature_request import SignatureRequest
 from resource.reusable_form import ReusableForm
 from resource.team import Team
+from resource.embedded import Embedded
 from resource.unclaimed_draft import UnclaimedDraft
 import utils.utils as utils
 from requests.auth import HTTPBasicAuth
-from utils.hsaccesstokenauth import HSAccessTokenAuth
 
 
 class HSClient(object):
@@ -269,7 +269,7 @@ class HSClient(object):
     def get_embeded_object(self, signature_id):
         request = HSRequest(self.auth)
         response = request.get(self.EMBEDDED_OBJECT_GET_URL, signature_id)
-        return Embeded(response["embedded"])
+        return Embedded(response["embedded"])
 
     # RECOMMEND: no title?
     def create_unclaimed_draft(
@@ -443,7 +443,7 @@ class HSClient(object):
 
     def _add_remove_user_reusable_form(self, url, reusable_form_id,
                                        account_id=None, email_address=None):
-        if (email_address is None and account_id is None):
+        if email_address is None and account_id is None:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
         data = {}
@@ -456,7 +456,7 @@ class HSClient(object):
         return ReusableForm(response["reusable_form"])
 
     def _add_remove_team_member(self, url, email_address=None, account_id=None):
-        if (email_address is None and account_id is None):
+        if email_address is None and account_id is None:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
         data = {}
