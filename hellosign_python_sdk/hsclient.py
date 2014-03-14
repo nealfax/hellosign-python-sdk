@@ -338,7 +338,7 @@ class HSClient(object):
             if not value:
                 raise HSException("Field " + key + " is required.")
         if either_fields is not None:
-            print either_fields
+            # print either_fields
             for field in either_fields:
                 if not any(field.values()):
                     raise HSException(
