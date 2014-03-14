@@ -21,6 +21,78 @@ class HTTPError(HSException):
     """Exception when an HTTP error found"""
 
 
+class BadRequest(HTTPError):
+    """docstring for BadRequest"""
+
+
+class Unauthorized(HTTPError):
+    """docstring for Unthorized"""
+
+
+class PaymentRequired(HTTPError):
+    """docstring for PaymentRequired"""
+
+
+class Forbidden(HTTPError):
+    """docstring for Forbidden"""
+
+
+class NotFound(HTTPError):
+    """docstring for NotFound"""
+
+
+class MethodNotAllowed(HTTPError):
+    """docstring for MethodNotAllowed"""
+
+
+class NotAcceptable(HTTPError):
+    """docstring for NotAcceptable"""
+
+
+class RequestTimeout(HTTPError):
+    """docstring for RequestTimeout"""
+
+
+class Conflict(HTTPError):
+    """docstring for Conflict"""
+
+
+class Gone(HTTPError):
+    """docstring for Gone"""
+
+
+class RequestURITooLong(HTTPError):
+    """docstring for RequestURITooLong"""
+
+
+class UnsupportedMediaType(HTTPError):
+    """docstring for UnsupportedMediaType"""
+
+
+class RequestedRangeNotSatisfiable(HTTPError):
+    """docstring for RequestedRangeNotSatisfiable"""
+
+
+class InternalServerError(HTTPError):
+    """docstring for InternalServerError"""
+
+
+class NotImplemented(HTTPError):
+    """docstring for NotImplemented"""
+
+
+class BadGateway(HTTPError):
+    """docstring for BadGateway"""
+
+
+class ServiceUnavailable(HTTPError):
+    """docstring for ServiceUnavailable"""
+
+
+class GatewayTimeout(HTTPError):
+    """docstring for GatewayTimeout"""
+
+
 class InvalidEmail(HSException):
     """Exception when an email address is invalid"""
 
