@@ -29,7 +29,7 @@ class HSRequest(object):
     def __init__(self, auth):
         self.auth = auth
 
-    def get(self, url, headers=None, parameters=None):
+    def get(self, url, headers=None, parameters=None, get_json=True):
         """Send a GET request with custome headers and parameters
 
         Args:
@@ -38,7 +38,8 @@ class HSRequest(object):
             parameters (str, optional): optional parameters
 
         Returns:
-            A JSON object of the returned response
+            A JSON object of the returned response if `get_json` is True,
+            Requests' response object otherwise
 
         """
 
@@ -52,7 +53,9 @@ class HSRequest(object):
                                 auth=self.auth)
         self.http_status_code = response.status_code
         self._check_error(response)
-        return response.json()
+        if get_json is True:
+            return response.json()
+        return response
 
     def get_file(self, url, filename, headers=None):
         """Get a file from a url and save it as `filename`
@@ -83,7 +86,7 @@ class HSRequest(object):
             return False
         return True
 
-    def post(self, url, data=None, files=None, headers=None):
+    def post(self, url, data=None, files=None, headers=None, get_json=True):
         """Make POST request to a url
 
         Args:
@@ -93,7 +96,8 @@ class HSRequest(object):
             headers (str, optional): custom headers
 
         Returns:
-            A JSON object of the returned response
+            A JSON object of the returned response if `get_json` is True,
+            Requests' response object otherwise
 
         """
 
@@ -104,7 +108,9 @@ class HSRequest(object):
                                  auth=self.auth, files=files)
         self.http_status_code = response.status_code
         self._check_error(response)
-        return response.json()
+        if get_json is True:
+            return response.json()
+        return response
 
     # TODO: use a expected key in returned json, if the returned key does not
     # match, return false...
