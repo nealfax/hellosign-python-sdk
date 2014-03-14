@@ -467,7 +467,7 @@ class HSClient(object):
         else:
             data = {"email_address": email_address}
         try:
-            print request.post(url, data)
+            request.post(url, data)
         except HTTPError:
             return False
         return True
