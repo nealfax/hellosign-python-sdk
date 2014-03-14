@@ -2,7 +2,7 @@ from setuptools import setup
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),
-                                'hellosign-python-sdk'))
+                                'hellosign_python_sdk'))
 
 
 def readme():
