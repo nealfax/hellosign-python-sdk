@@ -2,6 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.utils.request import HSRequest
+from hellosign_python_sdk.utils.exception import HTTPError, BadRequest, NotFound
 
 
 class Api(TestCase):
@@ -18,29 +19,23 @@ class Api(TestCase):
         response = request.get(url='https://www.hellosign.com/', get_json=False)
         self.assertEquals(response.status_code, 200)
 
-    # def test_post(self):
-    #     self.api.request.return_value = {'id': 'test'}
-    #     credit_card = self.api.post("v1/vault/credit-card", self.card_attributes)
+    def test_post(self):
+        request = HSRequest(self.client.auth)
+        response = request.post(url='https://www.hellosign.com/',
+                                data={"test": "None"}, get_json=False)
+        self.assertEquals(response.status_code, 200)
 
+    def test_bad_request(self):
+        request = HSRequest(self.client.auth)
+        try:
+            request.post(url=HSClient.ACCOUNT_UPDATE_URL,
+                         data={"bad": "request"})
+        except BadRequest:
+            pass
 
-    #     self.assertEqual(credit_card.get('error'), None)
-    #     self.assertNotEqual(credit_card.get('id'), None)
-
-    # def test_bad_request(self):
-    #     self.api.request.return_value = {'error': 'test'}
-    #     credit_card = self.api.post("v1/vault/credit-card", {})
-
-    #     self.api.request.assert_called_once_with('https://api.sandbox.paypal.com/v1/vault/credit-card',
-    #         'POST',
-    #         body='{}',
-    #         headers={})
-    #     self.assertNotEqual(credit_card.get('error'), None)
-
-    # def test_expired_time(self):
-    #     old_token = self.api.get_token()
-    #     self.api.token_hash["expires_in"] = 0
-    #     self.assertNotEqual(self.api.get_token(), old_token)
-
-    # def test_not_found(self):
-    #     self.api.request.side_effect = paypal.ResourceNotFound("error")
-    #     self.assertRaises(paypal.ResourceNotFound, self.api.get, ("/v1/payments/payment/PAY-1234"))
+    def test_not_found(self):
+        request = HSRequest(self.client.auth)
+        try:
+            request.get(url=HSClient.API_URL + "/not/found")
+        except NotFound:
+            pass
