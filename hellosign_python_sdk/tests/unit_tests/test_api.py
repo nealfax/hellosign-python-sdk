@@ -2,7 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.utils.request import HSRequest
-from hellosign_python_sdk.utils.exception import HTTPError, BadRequest, NotFound
+from hellosign_python_sdk.utils.exception import BadRequest, NotFound
 
 
 class Api(TestCase):

@@ -1,6 +1,6 @@
 import os
 import requests
-from exception import *
+from hellosign_python_sdk.utils.exception import *
 
 
 class HSRequest(object):
