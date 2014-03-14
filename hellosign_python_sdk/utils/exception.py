@@ -77,7 +77,7 @@ class InternalServerError(HTTPError):
     """docstring for InternalServerError"""
 
 
-class NotImplemented(HTTPError):
+class MethodNotImplemented(HTTPError):
     """docstring for NotImplemented"""
 
 

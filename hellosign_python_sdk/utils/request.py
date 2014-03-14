@@ -155,7 +155,7 @@ class HSRequest(object):
             415: UnsupportedMediaType,
             416: RequestedRangeNotSatisfiable,
             500: InternalServerError,
-            501: NotImplemented,
+            501: MethodNotImplemented,
             502: BadGateway,
             503: ServiceUnavailable,
             504: GatewayTimeout
