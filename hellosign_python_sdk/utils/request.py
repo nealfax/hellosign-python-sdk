@@ -1,6 +1,6 @@
 import os
 import requests
-from exception import HTTPError
+from exception import *
 
 
 class HSRequest(object):
@@ -133,7 +133,30 @@ class HSRequest(object):
         if response.status_code >= 400:
             # I intended to return False here but raising a meaningful exception
             # may make senses more.
-            raise HTTPError(str(response.status_code) +
-                            " error: " + response.json()["error"]["error_msg"])
+            raise self._check_http_error_code(response.status_code)(
+                str(response.status_code) + " error: " +
+                response.json()["error"]["error_msg"])
         # Return True if everything looks OK
         return True
+
+    def _check_http_error_code(self, code):
+        return {
+            400: BadRequest,
+            401: Unauthorized,
+            402: PaymentRequired,
+            403: Forbidden,
+            404: NotFound,
+            405: MethodNotAllowed,
+            406: NotAcceptable,
+            408: RequestTimeout,
+            409: Conflict,
+            410: Gone,
+            414: RequestURITooLong,
+            415: UnsupportedMediaType,
+            416: RequestedRangeNotSatisfiable,
+            500: InternalServerError,
+            501: NotImplemented,
+            502: BadGateway,
+            503: ServiceUnavailable,
+            504: GatewayTimeout
+        }.get(code, HTTPError)
