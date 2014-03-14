@@ -1,4 +1,4 @@
-from resource import Resource
+from hellosign_python_sdk.resource import Resource
 
 
 class Account(Resource):
