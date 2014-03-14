@@ -25,7 +25,7 @@ setup(name='hellosign-python-sdk',
       author='Minh Danh',
       author_email='minhdanh@siliconstraits.vn',
       license='MIT',
-      packages=['hellosign-python-sdk'],
+      packages=['hellosign_python_sdk'],
       install_requires=[
       'requests'
       ],
