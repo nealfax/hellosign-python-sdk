@@ -1,7 +1,7 @@
 from unittest import TestCase
-from hellosign-python-sdk.tests.test_helper import api_key
-from hellosign-python-sdk.hsclient import HSClient
-from hellosign-python-sdk.utils.request import HSRequest
+from hellosign_python_sdk.tests.test_helper import api_key
+from hellosign_python_sdk.hsclient import HSClient
+from hellosign_python_sdk.utils.request import HSRequest
 
 
 class Api(TestCase):
@@ -15,8 +15,8 @@ class Api(TestCase):
 
     def test_get(self):
         request = HSRequest(self.client.auth)
-        response = request.get('https://www.hellosign.com/')
-        self.assertEquals(response.http_status_code, 200)
+        response = request.get(url='https://www.hellosign.com/', get_json=False)
+        self.assertEquals(response.status_code, 200)
 
     # def test_post(self):
     #     self.api.request.return_value = {'id': 'test'}
