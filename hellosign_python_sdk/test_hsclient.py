@@ -1,9 +1,10 @@
 from hsclient import HSClient
-from resource.unclaimed_draft import UnclaimedDraft
+# from hellosign_python_sdk.resource.unclaimed_draft import UnclaimedDraft
+
 
 client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c74b03ece07c")
 # Account
-# client.get_account_info()
+client.get_account_info()
 # print client.account.email_address # print minhdanh@siliconstraits.vn
 # client.account.callback_url = "http://git.siliconstraits.vn"
 # client.update_account_info()
@@ -11,6 +12,7 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # print client.account.callback_url # print http://git.siliconstraits.vn
 # print client.account.documents_left # print 3
 # print client.account.email_address # print minhdanh@siliconstraits.vn
+print client.account
 
 # SignatureRequest
 # print client.create_account("tranthienthanh@gmail.com.vn", "abczyxll00348")
@@ -25,8 +27,8 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # rf_list = client.get_reusable_form_list()
 # print rf_list[0].reusable_form_id # print 85185eeafa15704ce7be1a9d5e911c2366f5313e
 # 4
-rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
-print rf.signer_roles[0]['name']
+# rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
+# print rf.signer_roles[0]['name']
 # 5
 # a = client.get_team_info()
 # print a.accounts

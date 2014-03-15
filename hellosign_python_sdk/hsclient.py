@@ -1,13 +1,13 @@
-from hellosign_python_sdk.utils.request import HSRequest
-from hellosign_python_sdk.utils.exception import *
-from hellosign_python_sdk.resource.account import Account
-from hellosign_python_sdk.resource.signature_request import SignatureRequest
-from hellosign_python_sdk.resource.reusable_form import ReusableForm
-from hellosign_python_sdk.resource.team import Team
-from hellosign_python_sdk.resource.embedded import Embedded
-from hellosign_python_sdk.resource.unclaimed_draft import UnclaimedDraft
-from hellosign_python_sdk.utils.hsaccesstokenauth import HSAccessTokenAuth
-import hellosign_python_sdk.utils.utils as utils
+from utils.request import HSRequest
+from utils.exception import *
+from resource.account import Account
+from resource.signature_request import SignatureRequest
+from resource.reusable_form import ReusableForm
+from resource.team import Team
+from resource.embedded import Embedded
+from resource.unclaimed_draft import UnclaimedDraft
+from utils.hsaccesstokenauth import HSAccessTokenAuth
+import utils.utils as utils
 from requests.auth import HTTPBasicAuth
 
 
