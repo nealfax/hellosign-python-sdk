@@ -1,4 +1,4 @@
-from hellosign_python_sdk.resource.resource import Resource
+from resource import Resource
 
 
 class Embedded(Resource):
