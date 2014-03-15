@@ -9,6 +9,7 @@ install:
   - pip install -r test_requirements.txt --use-mirrors
 script:
   # - "python setup.py test"
-  - nosetests hellosign_python_sdk/tests
+  # - nosetests hellosign_python_sdk/tests
+  - nosetests --with-coverage --cover-package=hellosign_python_sdk --include=hellosign_python_sdk/tests/* --exclude=functional*
 after_success:
   - coveralls
