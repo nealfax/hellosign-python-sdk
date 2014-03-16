@@ -8,6 +8,7 @@ from hellosign_python_sdk.resource.embedded import Embedded
 from hellosign_python_sdk.resource.reusable_form import ReusableForm
 from hellosign_python_sdk.resource.signature_request import SignatureRequest
 from hellosign_python_sdk.resource.team import Team
+from hellosign_python_sdk.resource.unclaimed_draft import UnclaimedDraft
 
 
 class TestException(TestCase):
