@@ -135,3 +135,13 @@ class TestException(TestCase):
             team.invited_accounts, [
                 {'account_id': 1234570, 'email_address': 'user_3@example.com'},
                 {'account_id': 1234571, 'email_address': 'user_4@example.com'}])
+
+    def test_unclaimed_draft(self):
+        ud = UnclaimedDraft(
+            {'claim_url': 'http://example.com/claim_url',
+             'signing_redirect_url': 'http://example.com/signing_redirect_url',
+             'test_mode': '0'})
+        self.assertEquals(ud.claim_url, 'http://example.com/claim_url')
+        self.assertEquals(
+            ud.signing_redirect_url, 'http://example.com/signing_redirect_url')
+        self.assertEquals(ud.test_mode, '0')
