@@ -54,7 +54,7 @@ class HSRequest(object):
         self.http_status_code = response.status_code
         self._check_error(response)
         if get_json is True:
-            print response.json()
+            # print response.json()
             return response.json()
         return response
 

@@ -58,6 +58,19 @@ class HSClient(object):
 
     def __init__(self, api_email=None, api_password=None, api_key=None,
                  api_accesstoken=None, api_accesstokentype=None):
+        """Initialize the client object with authentication information to send
+        requests
+
+        Args:
+            api_email (str): E-mail of the account to make the requests
+            api_password (str): Password of the account used with email address
+            api_key (str): API Key. You can find your API key in
+             https://www.hellosign.com/home/myAccount/current_tab/integrations
+            api_accesstoken (str):
+            api_accesstokentype (str):
+
+        """
+
         super(HSClient, self).__init__()
         self.auth = self._authenticate(
             api_email, api_password, api_key, api_accesstoken,
@@ -66,6 +79,17 @@ class HSClient(object):
         # self.get_account_info()
 
     def create_account(self, email, password):
+        """Create a new account
+
+        Args:
+            email (str): Email address of the new account to create
+            password (str): Password of the new account
+
+        Returns:
+            New Account object if successful
+
+        """
+
         if email is None:
             raise InvalidEmail("Email cannot be empty")
         elif not utils.is_email(email):
@@ -80,6 +104,20 @@ class HSClient(object):
     # Get account info and put in self.account so that further access to the
     # info can be made by using self.account.attribute
     def get_account_info(self):
+        """Get current account information
+
+        The information then will be saved in `self.account` so that you can
+        access the information like this:
+
+        >>> hsclient = HSClient()
+        >>> hsclient.get_account_info()
+        >>> print hsclient.account.email_address
+
+        Returns:
+            True if the information fetched successfully, False otherwise
+
+        """
+
         request = HSRequest(self.auth)
         try:
             response = request.get(self.ACCOUNT_INFO_URL)
@@ -90,6 +128,14 @@ class HSClient(object):
 
     # At the moment you can only update your callback_url only
     def update_account_info(self):
+        """Update current account information
+
+        At the moment you can only update your callback_url.
+
+        Returns:
+            True if the account is updated successfully, False otherwise
+
+        """
         request = HSRequest(self.auth)
         try:
             request.post(self.ACCOUNT_UPDATE_URL, {
@@ -101,12 +147,34 @@ class HSClient(object):
     # Get a signature request
     # param @signature_request_id
     def get_signature_request(self, signature_request_id):
+        """Get a signature request by its ID
+
+        Args:
+            signature_request_id (str): The id of the SignatureRequest to
+                retrieve
+
+        Returns:
+            A SignatureRequest object
+
+        """
+
         request = HSRequest(self.auth)
         response = request.get(
             self.SIGNATURE_REQUEST_INFO_URL + signature_request_id)
         return SignatureRequest(response["signature_request"])
 
+    # TODO: return list info besides signature request list
     def get_signature_request_list(self):
+        """Get a list of SignatureRequest that you can access
+
+        This includes SignatureRequests you have sent as well as received, but
+        not ones that you have been CCed on.
+
+        Returns:
+            A list of SignatureRequest objects
+
+        """
+
         sr_list = []
         request = HSRequest(self.auth)
         response = request.get(self.SIGNATURE_REQUEST_LIST_URL)
@@ -115,15 +183,46 @@ class HSClient(object):
         return sr_list
 
     def get_signature_request_file(self, signature_request_id, filename):
+        """Download the PDF copy of the current documents
+
+        Args:
+            signature_request_id (str): ID of the Signature Request
+            filename (str): Filename to save the PDF file to. This should be a
+            full path.
+
+        Returns:
+            True if file is downloaded and written successfully, False
+            otherwise.
+
+        """
+
         request = HSRequest(self.auth)
-        request.get_file(
+        return request.get_file(
             self.SIGNATURE_REQUEST_DOWNLOAD_PDF_URL + signature_request_id,
             filename)
 
     def get_signature_request_final_copy(self, signature_request_id, filename):
         # This api call is DEPRECATED
+        """Download the PDF copy of the finalized documents
+
+        Download the PDF copy of the finalized documents specified by the
+        `signature_request_id` parameter
+        Warning: This API call is deprecated. Use `get_signature_request_file`
+        instead.
+
+        Args:
+            signature_request_id (str): ID of the Signature Request
+            filename (str): Filename to save the PDF file to. This should be a
+            full path.
+
+        Returns:
+            True if file is downloaded and written successfully, False
+            otherwise.
+
+        """
+
         request = HSRequest(self.auth)
-        request.get_file(
+        return request.get_file(
             self.SIGNATURE_REQUEST_DOWNLOAD_FINAL_COPY_URL +
             signature_request_id, filename)
 
@@ -134,6 +233,49 @@ class HSClient(object):
             signing_redirect_url=None, signers=None,
             cc_email_addresses=None,
             form_fields_per_document=None):
+        """Creates and sends a new SignatureRequest with the submitted documents
+
+        Creates and sends a new SignatureRequest with the submitted documents.
+        If form_fields_per_document is not specified, a signature page will be
+        affixed where all signers will be required to add their signature,
+        signifying their agreement to all contained documents.
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            files (list of str): the uploaded file(s) to send for signature
+            file_urls (list of str): urls of the file for HelloSign to download
+                to send for signature. Use either `files` or `file_urls`
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                order (str, optional): The order the signer is required to sign
+                    in
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            cc_email_addresses (list of str, optional): A list of email
+                addresses that should be CCed
+            form_fields_per_document (str): The fields that should appear on the
+                document, expressed as a serialized JSON data structure which is
+                a list of lists of the form fields. Please refer to the API
+                reference of HelloSign for more details
+                (https://www.hellosign.com/api/reference#SignatureRequest)
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
 
         self._check_required_fields(
             {"signers": signers}, [{"files": files, "file_urls": file_urls}])
@@ -148,6 +290,47 @@ class HSClient(object):
             self, test_mode="0", reusable_form_id=None, title=None,
             subject=None, message=None, signing_redirect_url=None,
             signers=None, ccs=None, custom_fields=None):
+        """Creates and sends a new SignatureRequest based off of a ReusableForm
+
+        Creates and sends a new SignatureRequest based off of the ReusableForm
+        specified with the reusable_form_id parameter.
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            reusable_form_id (str): The id of the ReusableForm to use when
+                creating the SignatureRequest.
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            ccs (list of str, optional): The email address of the CC filling the
+                role of RoleName. Required when a CC role exists for the
+                ReusableForm. Each dict has the following attributes:
+
+                role_name (str):
+                email_address (str):
+
+            custom_fields (list of dict, optional): A list of custom fields.
+                Required when a CustomField exists in the ReusableForm. An item
+                of the list should look like this: `{'name: value'}`
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
 
         self._check_required_fields(
             {"signers": signers, "reusable_form_id": reusable_form_id})
@@ -158,6 +341,24 @@ class HSClient(object):
             ccs=ccs, custom_fields=custom_fields)
 
     def remind_signature_request(self, signature_request_id, email_address):
+        """Sends an email to the signer reminding them to sign the signature
+        request
+
+        Sends an email to the signer reminding them to sign the signature
+        request. You cannot send a reminder within 1 hours of the last reminder
+        that was sent. This includes manual AND automatic reminders.
+
+        Args:
+            signature_request_id (str): The id of the SignatureRequest to send a
+                reminder for
+            email_address (str): The email address of the signer to send a
+                reminder to
+
+        Returns:
+            A SignatureRequest object of the requested signature_request_id
+
+        """
+
         request = HSRequest(self.auth)
         response = request.post(self.SIGNATURE_REQUEST_REMIND_URL +
                                 signature_request_id,
@@ -165,6 +366,20 @@ class HSClient(object):
         return SignatureRequest(response["signature_request"])
 
     def cancel_signature_request(self, signature_request_id):
+        """Cancels a SignatureRequest
+
+        Cancels a SignatureRequest. After canceling, no one will be able to sign
+        or access the SignatureRequest or its documents. Only the requester can
+        cancel and only before everyone has signed.
+
+        Args:
+            signing_request_id (str): The id of the SignatureRequest to cancel
+
+        Returns:
+            True if the cancellation is successful, False otherwise
+
+        """
+
         request = HSRequest(self.auth)
         try:
             request.post(
@@ -178,6 +393,56 @@ class HSClient(object):
             title=None, subject=None, message=None, signing_redirect_url=None,
             signers=None, cc_email_addresses=None,
             form_fields_per_document=None):
+        """Creates and sends a new SignatureRequest with the submitted documents
+
+        Creates a new SignatureRequest with the submitted documents to be signed
+        in an embedded iFrame . If form_fields_per_document is not specified, a
+        signature page will be affixed where all signers will be required to add
+        their signature, signifying their agreement to all contained documents.
+        Note that embedded signature requests can only be signed in embedded
+        iFrames whereas normal signature requests can only be signed on
+        HelloSign.
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            client_id (str): Client id of the app you're using to create this
+                embedded signature request. Visit the embedded page to learn
+                more about this parameter
+                (https://www.hellosign.com/api/embedded)
+            files (list of str): the uploaded file(s) to send for signature
+            file_urls (list of str): urls of the file for HelloSign to download
+                to send for signature. Use either `files` or `file_urls`
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                order (str, optional): The order the signer is required to sign
+                    in
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            cc_email_addresses (list of str, optional): A list of email
+                addresses that should be CCed
+            form_fields_per_document (str): The fields that should appear on the
+                document, expressed as a serialized JSON data structure which is
+                a list of lists of the form fields. Please refer to the API
+                reference of HelloSign for more details
+                (https://www.hellosign.com/api/reference#SignatureRequest)
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
 
         self._check_required_fields(
             {"signers": signers, "client_id": client_id},
@@ -193,6 +458,54 @@ class HSClient(object):
             self, test_mode="0", client_id=None, reusable_form_id=None,
             title=None, subject=None, message=None, signing_redirect_url=None,
             signers=None, ccs=None, custom_fields=None):
+        """Creates and sends a new SignatureRequest based off of a ReusableForm
+
+        Creates a new SignatureRequest based on the given ReusableForm to be
+        signed in an embedded iFrame. Note that embedded signature requests can
+        only be signed in embedded iFrames whereas normal signature requests can
+        only be signed on HelloSign.
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            client_id (str): Client id of the app you're using to create this
+                embedded signature request. Visit the embedded page to learn
+                more about this parameter
+                (https://www.hellosign.com/api/embedded)
+            reusable_form_id (str): The id of the ReusableForm to use when
+                creating the SignatureRequest.
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            ccs (list of str, optional): The email address of the CC filling the
+                role of RoleName. Required when a CC role exists for the
+                ReusableForm. Each dict has the following attributes:
+
+                role_name (str):
+                email_address (str):
+
+            custom_fields (list of dict, optional): A list of custom fields.
+                Required when a CustomField exists in the ReusableForm. An item
+                of the list should look like this: `{'name: value'}`
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
+
         self._check_required_fields(
             {"signers": signers, "reusable_form_id": reusable_form_id,
              "client_id": client_id})
@@ -203,12 +516,34 @@ class HSClient(object):
             signers=signers, ccs=ccs, custom_fields=custom_fields)
 
     def get_reusable_form(self, reusable_form_id):
+        """Gets a ReusableForm which includes a list of Accounts that can access
+        it
+
+        Args:
+            reusable_form_id (str): The id of the ReusableForm to retrieve
+
+        Returns:
+            A ReusableForm object specified by the id parameter
+
+        """
+
         request = HSRequest(self.auth)
         response = request.get(self.REUSABLE_FORM_GET_URL + reusable_form_id)
         return ReusableForm(response["reusable_form"])
 
     # TODO: return the total results (in another function, variable...)
     def get_reusable_form_list(self, page=1):
+        """Lists your ReusableForms
+
+        Args:
+            page (int, optional): Which page number of the ReusableForm List to
+                return. Defaults to 1.
+
+        Returns:
+            A list the ReusableForms that are accessible by you
+
+        """
+
         rf_list = []
         request = HSRequest(self.auth)
         response = request.get(
