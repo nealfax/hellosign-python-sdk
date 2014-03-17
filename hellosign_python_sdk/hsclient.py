@@ -557,28 +557,93 @@ class HSClient(object):
     # RECOMMEND: this api does not fail if the user has been added...
     def add_user_to_reusable_form(
             self, reusable_form_id, account_id=None, email_address=None):
+        """Gives the specified Account access to the specified ReusableForm
+
+        Args:
+            reusable_form_id (str): The id of the ReusableForm to give the
+                Account access to
+            account_id (str): The id of the Account to give access to the
+                ReusableForm. The account id prevails if both are provided.
+            email_address (str): The email address of the Account to give access
+                to
+
+        Returns:
+            An ReusableForm object specified by the reusable_form_id parameter
+
+        """
+
         return self._add_remove_user_reusable_form(
             self.REUSABLE_FORM_ADD_USER_URL, reusable_form_id, account_id,
             email_address)
 
     def remove_user_from_reusable_form(
             self, reusable_form_id, account_id=None, email_address=None):
+        """Removes the specified Account's access to the specified ReusableForm
+
+        Args:
+            reusable_form_id (str): The id of the ReusableForm to remove the
+                Account's access from.
+            account_id (str): The id of the Account to remove
+                access from the ReusableForm. The account id prevails if both
+                are provided.
+            email_address (str): The email address of the Account to remove
+                access from
+
+        Returns:
+            An ReusableForm object specified by the reusable_form_id parameter
+
+        """
+
         return self._add_remove_user_reusable_form(
             self.REUSABLE_FORM_REMOVE_USER_URL, reusable_form_id, account_id,
             email_address)
 
     def get_team_info(self):
+        """Gets your Team and a list of its members
+
+        Returns information about your Team as well as a list of its members.
+        If you do not belong to a Team, a 404 error with an error_name of
+        "not_found" will be returned.
+
+        Returns:
+            A Team object
+
+        """
+
         request = HSRequest(self.auth)
         response = request.get(self.TEAM_INFO_URL)
         return Team(response["team"])
 
     def create_team(self, name):
+        """Creates a new Team
+
+        Creates a new Team and makes you a member. You must not currently belong
+        to a Team to invoke.
+
+        Args:
+            name (str): The name of your Team
+
+        Returns:
+            A Team object of the newly created Team
+
+        """
+
         request = HSRequest(self.auth)
         response = request.post(self.TEAM_CREATE_URL, {"name": name})
         return Team(response["team"])
 
-    # The api event create a new team if you do not belong to any team
+    # RECOMMEND:The api event create a new team if you do not belong to any team
     def update_team_name(self, name):
+        """Updates a Team's name
+
+        Args:
+            name (str): The name of your Team
+
+        Returns:
+            True if the Team is updated successfully, False otherwise
+
+        """
+
         request = HSRequest(self.auth)
         try:
             request.post(self.TEAM_UPDATE_URL, {"name": name})
@@ -587,6 +652,16 @@ class HSClient(object):
         return True
 
     def destroy_team(self):
+        """Delete your Team
+
+        Deletes your Team. Can only be invoked when you have a Team with only
+        one member (yourself).
+
+        Returns:
+            True if the Team is deleted successfully, False otherwise
+
+        """
+
         request = HSRequest(self.auth)
         try:
             request.post(self.TEAM_DESTROY_URL)
@@ -595,17 +670,59 @@ class HSClient(object):
         return True
 
     def add_team_member(self, email_address=None, account_id=None):
+        """Add or invite a user to your Team
+
+        Args:
+            email_address (str): email address of the Account of the user to
+                invite to your Team. The account id prevails if both are
+                provided.
+            account_id (str): The id of the Account of the user to invite to
+                your Team.
+
+        Returns:
+            A Team ojbect of the Team you belong to
+
+        """
+
         return self._add_remove_team_member(self.TEAM_ADD_MEMBER_URL,
                                             email_address, account_id)
 
     # RECOMMEND: does not fail if user has been removed
     def remove_team_member(self, email_address=None, account_id=None):
+        """Remove a user from your Team
+
+        Args:
+            email_address (str): email address of the Account of the user to
+                remove from your Team. The account id prevails if both are
+                provided.
+            account_id (str): The id of the Account of the user to remove from
+                your Team.
+
+        Returns:
+            A Team ojbect of the Team you belong to
+
+        """
+
         return self._add_remove_team_member(self.TEAM_REMOVE_MEMBER_URL,
                                             email_address, account_id)
 
     def get_embeded_object(self, signature_id):
+        """Retrieves a embedded signing object
+
+        Retrieves an embedded object containing a signature url that can be
+        opened in an iFrame
+
+        Args:
+            signature_id (str): The id of the signature to get a signature url
+                for
+
+        Returns:
+            An Embedded object specified by signature_id
+
+        """
+
         request = HSRequest(self.auth)
-        response = request.get(self.EMBEDDED_OBJECT_GET_URL, signature_id)
+        response = request.get(self.EMBEDDED_OBJECT_GET_URL + signature_id)
         return Embedded(response["embedded"])
 
     # RECOMMEND: no title?
@@ -613,6 +730,55 @@ class HSClient(object):
             self, test_mode="0", files=None, file_urls=None, draft_type=None,
             subject=None, message=None, signers=None, cc_email_addresses=None,
             signing_redirect_url=None, form_fields_per_document=None):
+        """Creates a new Draft that can be claimed using the claim URL
+
+        Creates a new Draft that can be claimed using the claim URL. The first
+        authenticated user to access the URL will claim the Draft and will be
+        shown either the "Sign and send" or the "Request signature" page with
+        the Draft loaded. Subsequent access to the claim URL will result in a
+        404. If the type is "send_document" then only the file parameter is
+        required. If the type is "request_signature", then the identities of the
+        signers and optionally the location of signing elements on the page are
+        also required.
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request created from this draft will not be legally binding if
+                set to 1. Defaults to 0.
+            files (list of str): the uploaded file(s) to send for signature
+            file_urls (list of str): urls of the file for HelloSign to download
+                to send for signature. Use either `files` or `file_urls`
+            type (str): The type of unclaimed draft to create. Use
+                "send_document" to create a claimable file, and
+                "request_signature" for a claimable signature request. If the
+                type is "request_signature" then signers name and email_address
+                are not optional.
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                order (str, optional): The order the signer is required to sign
+                    in
+            cc_email_addresses (list of str, optional): A list of email
+                addresses that should be CCed
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            form_fields_per_document (str): The fields that should appear on the
+                document, expressed as a serialized JSON data structure which is
+                a list of lists of the form fields. Please refer to the API
+                reference of HelloSign for more details
+                (https://www.hellosign.com/api/reference#SignatureRequest)
+
+        Retruns:
+            A UnclaimedDraft object of the newly created Draft
+
+        """
+
         files_payload = {}
         for idx, filename in enumerate(files):
             files_payload["file[" + str(idx) + "]"] = open(filename, 'rb')
@@ -654,6 +820,23 @@ class HSClient(object):
 
     def _authenticate(self, api_email=None, api_password=None, api_key=None,
                       api_accesstoken=None, api_accesstokentype=None):
+        """Create authentication object to send requests
+
+        Args:
+            api_email (str): E-mail of the account to make the requests
+            api_password (str): Password of the account used with email address
+            api_key (str): API Key. You can find your API key in
+             https://www.hellosign.com/home/myAccount/current_tab/integrations
+            api_accesstoken (str):
+            api_accesstokentype (str):
+
+        Raises:
+            NoAuthMethod: If no authentication information found
+
+        Returns:
+            A HTTPBasicAuth or HSAccessTokenAuth object
+
+        """
 
         if api_accesstokentype and api_accesstoken:
             return HSAccessTokenAuth(api_accesstokentype, api_accesstoken)
@@ -665,6 +848,20 @@ class HSClient(object):
             raise NoAuthMethod("No authentication information found!")
 
     def _check_required_fields(self, fields=None, either_fields=None):
+        """Check the values of the fields
+
+        If no value found in `fields`, an exception will be raised.
+        `either_fields` are the fields that one of them must have a value
+
+        Raises:
+            HSException: If no value found in at least one item of`fields`, or
+                no value found in one of the items of `either_fields`
+
+        Returns:
+            None
+
+        """
+
         for key, value in fields.iteritems():
             # If value is a dict, one of the fields in the dict is required ->
             # exception if all are None
@@ -680,13 +877,55 @@ class HSClient(object):
                         "One of the fields in " + ", ".join(field.keys()) +
                         " is required.")
 
-    # To share the same logic between send_signature_request &
-    # send_signature_request_embedded
     def _send_signature_request(self, test_mode="0", client_id=None, files=None,
                                 file_urls=None, title=None, subject=None,
                                 message=None, signing_redirect_url=None,
                                 signers=None, cc_email_addresses=None,
                                 form_fields_per_document=None):
+        """To share the same logic between send_signature_request &
+        send_signature_request_embedded functions
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            client_id (str): Client id of the app you're using to create this
+                embedded signature request. Visit the embedded page to learn
+                more about this parameter
+                (https://www.hellosign.com/api/embedded)
+            files (list of str): the uploaded file(s) to send for signature
+            file_urls (list of str): urls of the file for HelloSign to download
+                to send for signature. Use either `files` or `file_urls`
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                order (str, optional): The order the signer is required to sign
+                    in
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            cc_email_addresses (list of str, optional): A list of email
+                addresses that should be CCed
+            form_fields_per_document (str): The fields that should appear on the
+                document, expressed as a serialized JSON data structure which is
+                a list of lists of the form fields. Please refer to the API
+                reference of HelloSign for more details
+                (https://www.hellosign.com/api/reference#SignatureRequest)
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
+
         files_payload = {}
         for idx, filename in enumerate(files):
             # print filename
@@ -731,13 +970,55 @@ class HSClient(object):
             files=files_payload)
         return SignatureRequest(response["signature_request"])
 
-    # To share the same logic between send_signature_request_with_rf and
-    # send_signature_request_embedded_with_rf
     def _send_signature_request_with_rf(self, test_mode="0", client_id=None,
                                         reusable_form_id=None, title=None,
                                         subject=None, message=None,
                                         signing_redirect_url=None, signers=None,
                                         ccs=None, custom_fields=None):
+        """To share the same logic between send_signature_request_with_rf and
+        send_signature_request_embedded_with_rf
+
+        Args:
+            test_mode (str, optional): Whether this is a test, the signature
+                request will not be legally binding if set to 1. Defaults to 0.
+            client_id (str): Client id of the app you're using to create this
+                embedded signature request. Visit the embedded page to learn
+                more about this parameter
+                (https://www.hellosign.com/api/embedded)
+            reusable_form_id (str): The id of the ReusableForm to use when
+                creating the SignatureRequest.
+            title (str, optional): The title you want to assign to the
+                SignatureRequest
+            subject (str, optional): The subject in the email that will be sent
+                to the signers
+            message (str, optional): The custom message in the email that will
+                be sent to the signers
+            signing_redirect_url (str, optional): The URL you want the signer
+                redirected to after they successfully sign.
+            signers (list of dict): A list of signers, which each has the
+                following attributes:
+
+                name (str): The name of the signer
+                email_address (str): email address of the signer
+                pin (str, optional): The 4-digit code that will secure this
+                    signer's signature page. You must have a business plan to
+                    use this feature
+            ccs (list of str, optional): The email address of the CC filling the
+                role of RoleName. Required when a CC role exists for the
+                ReusableForm. Each dict has the following attributes:
+
+                role_name (str):
+                email_address (str):
+
+            custom_fields (list of dict, optional): A list of custom fields.
+                Required when a CustomField exists in the ReusableForm. An item
+                of the list should look like this: `{'name: value'}`
+
+        Retruns:
+            A SignatureRequest object of the newly created Signature Request
+
+        """
+
         signers_payload = {}
         for signer in signers:
             signers_payload[
@@ -780,6 +1061,24 @@ class HSClient(object):
 
     def _add_remove_user_reusable_form(self, url, reusable_form_id,
                                        account_id=None, email_address=None):
+        """Add or Remove user from a ReusableForm
+
+        We use this function for two tasks because they have the same API call
+
+        Args:
+            reusable_form_id (str): The id of the ReusableForm
+            account_id (str): ID of the Account to add/remove access to/from
+            email_address (str): email_address of the Account to add/remove
+                access to/from
+
+        Raises:
+            HSException: If no email address or account_id specified
+
+        Returns:
+            A ReusableForm object specified by reusable_form_id parameter
+
+        """
+
         if email_address is None and account_id is None:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
@@ -793,6 +1092,20 @@ class HSClient(object):
         return ReusableForm(response["reusable_form"])
 
     def _add_remove_team_member(self, url, email_address=None, account_id=None):
+        """Add or Remove a team member
+
+        We use this function for two different tasks because they have the same
+        API call
+
+        Args:
+            email_address (str): Email address of the Account to add/remove
+            account_id (str): ID of the Account to add/remove
+
+        Returns:
+            True if Account is added/removed successfully, False otherwise
+
+        """
+
         if email_address is None and account_id is None:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
