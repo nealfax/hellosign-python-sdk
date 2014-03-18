@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hellosign_python_sdk.utils package &mdash; hellosign-python-sdk 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="hellosign-python-sdk 0.1.1 documentation" href="index.html" />
+    <link rel="up" title="hellosign_python_sdk package" href="hellosign_python_sdk.html" />
+    <link rel="prev" title="hellosign_python_sdk.tests package" href="hellosign_python_sdk.tests.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          hellosign-python-sdk</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.1.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="hellosign_python_sdk.html">hellosign_python_sdk package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="hellosign_python_sdk.html">hellosign_python_sdk package</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">hellosign_python_sdk.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-hellosign_python_sdk.utils.exception">hellosign_python_sdk.utils.exception module</a></li>
+<li><a class="reference internal" href="#module-hellosign_python_sdk.utils.hsaccesstokenauth">hellosign_python_sdk.utils.hsaccesstokenauth module</a></li>
+<li><a class="reference internal" href="#module-hellosign_python_sdk.utils.request">hellosign_python_sdk.utils.request module</a></li>
+<li><a class="reference internal" href="#module-hellosign_python_sdk.utils.utils">hellosign_python_sdk.utils.utils module</a></li>
+<li><a class="reference internal" href="#module-hellosign_python_sdk.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="hellosign_python_sdk.tests.html" title="Previous Chapter: hellosign_python_sdk.tests package"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; hellosign_python...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/hellosign_python_sdk.utils.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="hellosign-python-sdk-utils-package">
+<h1>hellosign_python_sdk.utils package<a class="headerlink" href="#hellosign-python-sdk-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-hellosign_python_sdk.utils.exception">
+<span id="hellosign-python-sdk-utils-exception-module"></span><h2>hellosign_python_sdk.utils.exception module<a class="headerlink" href="#module-hellosign_python_sdk.utils.exception" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.BadGateway">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">BadGateway</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.BadGateway" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for BadGateway</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.BadRequest">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">BadRequest</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.BadRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for BadRequest</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.Conflict">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">Conflict</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.Conflict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for Conflict</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.EmptyPassword">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">EmptyPassword</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.EmptyPassword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HSException" title="hellosign_python_sdk.utils.exception.HSException"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HSException</span></tt></a></p>
+<p>Exception when a password is empty</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.Forbidden">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">Forbidden</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.Forbidden" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for Forbidden</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.GatewayTimeout">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">GatewayTimeout</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.GatewayTimeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for GatewayTimeout</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.Gone">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">Gone</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.Gone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for Gone</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.HSException">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">HSException</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.HSException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>General exception class</p>
+<p>We use this object to raise exceptions when none of its child classes is
+suitable for use.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.HTTPError">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">HTTPError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.HTTPError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HSException" title="hellosign_python_sdk.utils.exception.HSException"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HSException</span></tt></a></p>
+<p>Exception when an HTTP error found</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.InternalServerError">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">InternalServerError</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.InternalServerError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for InternalServerError</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.InvalidEmail">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">InvalidEmail</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.InvalidEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HSException" title="hellosign_python_sdk.utils.exception.HSException"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HSException</span></tt></a></p>
+<p>Exception when an email address is invalid</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.MethodNotAllowed">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">MethodNotAllowed</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.MethodNotAllowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for MethodNotAllowed</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.MethodNotImplemented">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">MethodNotImplemented</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.MethodNotImplemented" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for NotImplemented</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.NoAuthMethod">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">NoAuthMethod</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.NoAuthMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HSException" title="hellosign_python_sdk.utils.exception.HSException"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HSException</span></tt></a></p>
+<p>Exception when no authentication information found</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.NotAcceptable">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">NotAcceptable</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.NotAcceptable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for NotAcceptable</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.NotFound">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">NotFound</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.NotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for NotFound</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.PaymentRequired">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">PaymentRequired</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.PaymentRequired" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for PaymentRequired</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.RequestTimeout">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">RequestTimeout</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.RequestTimeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for RequestTimeout</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.RequestURITooLong">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">RequestURITooLong</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.RequestURITooLong" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for RequestURITooLong</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.RequestedRangeNotSatisfiable">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">RequestedRangeNotSatisfiable</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.RequestedRangeNotSatisfiable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for RequestedRangeNotSatisfiable</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.ServiceUnavailable">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">ServiceUnavailable</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.ServiceUnavailable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for ServiceUnavailable</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.Unauthorized">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">Unauthorized</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.Unauthorized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for Unthorized</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="hellosign_python_sdk.utils.exception.UnsupportedMediaType">
+<em class="property">exception </em><tt class="descclassname">hellosign_python_sdk.utils.exception.</tt><tt class="descname">UnsupportedMediaType</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.exception.UnsupportedMediaType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hellosign_python_sdk.utils.exception.HTTPError" title="hellosign_python_sdk.utils.exception.HTTPError"><tt class="xref py py-class docutils literal"><span class="pre">hellosign_python_sdk.utils.exception.HTTPError</span></tt></a></p>
+<p>docstring for UnsupportedMediaType</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-hellosign_python_sdk.utils.hsaccesstokenauth">
+<span id="hellosign-python-sdk-utils-hsaccesstokenauth-module"></span><h2>hellosign_python_sdk.utils.hsaccesstokenauth module<a class="headerlink" href="#module-hellosign_python_sdk.utils.hsaccesstokenauth" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hellosign_python_sdk.utils.hsaccesstokenauth.HSAccessTokenAuth">
+<em class="property">class </em><tt class="descclassname">hellosign_python_sdk.utils.hsaccesstokenauth.</tt><tt class="descname">HSAccessTokenAuth</tt><big>(</big><em>access_token</em>, <em>access_token_type</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.hsaccesstokenauth.HSAccessTokenAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">requests.auth.AuthBase</span></tt></p>
+<p>Authentication object using HelloSign&#8217;s access token</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-hellosign_python_sdk.utils.request">
+<span id="hellosign-python-sdk-utils-request-module"></span><h2>hellosign_python_sdk.utils.request module<a class="headerlink" href="#module-hellosign_python_sdk.utils.request" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="hellosign_python_sdk.utils.request.HSRequest">
+<em class="property">class </em><tt class="descclassname">hellosign_python_sdk.utils.request.</tt><tt class="descname">HSRequest</tt><big>(</big><em>auth</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Object to handle HTTP requests</p>
+<p>Although we have greate requests package which can handle the HTTP request
+beautifully, we need this class to fit better our need like sending the
+requests with authentication information, download files, check HTTP
+errors...</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>DEFAULT_ENCODING (str): Default encoding for requests
+USER_AGENT (str): HTTP User agent used when sending requests
+parameters (dict): Some parameters for GET requests
+headers (dict): Custome headers for every requests
+http_status_code (int): HTTP status code returned of requests</dd>
+</dl>
+<dl class="attribute">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.DEFAULT_ENCODING">
+<tt class="descname">DEFAULT_ENCODING</tt><em class="property"> = 'UTF-8'</em><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.DEFAULT_ENCODING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.USER_AGENT">
+<tt class="descname">USER_AGENT</tt><em class="property"> = 'HelloSign Java SDK'</em><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.USER_AGENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.get">
+<tt class="descname">get</tt><big>(</big><em>url</em>, <em>headers=None</em>, <em>parameters=None</em>, <em>get_json=True</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a GET request with custome headers and parameters</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>url (str): URL to send the request to
+headers (str, optional): custom headers
+parameters (str, optional): optional parameters</dd>
+<dt>Returns:</dt>
+<dd>A JSON object of the returned response if <cite>get_json</cite> is True,
+Requests&#8217; response object otherwise</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.get_file">
+<tt class="descname">get_file</tt><big>(</big><em>url</em>, <em>filename</em>, <em>headers=None</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.get_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a file from a url and save it as <cite>filename</cite></p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">url (str): URL to send the request to
+filename (str): File name to save the file as, this can be either</p>
+<blockquote>
+<div>a full path or a relative path</div></blockquote>
+<p class="last">headers (str, optional): custom headers</p>
+</dd>
+<dt>Returns:</dt>
+<dd>True if file is downloaded and written successfully, False
+otherwise.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.headers">
+<tt class="descname">headers</tt><em class="property"> = {'User-Agent': 'HelloSign Java SDK'}</em><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.headers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.http_status_code">
+<tt class="descname">http_status_code</tt><em class="property"> = 0</em><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.http_status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.parameters">
+<tt class="descname">parameters</tt><em class="property"> = {}</em><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.parameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="hellosign_python_sdk.utils.request.HSRequest.post">
+<tt class="descname">post</tt><big>(</big><em>url</em>, <em>data=None</em>, <em>files=None</em>, <em>headers=None</em>, <em>get_json=True</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.request.HSRequest.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make POST request to a url</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>url (str): URL to send the request to
+data (dict, optional): Data to send
+files (dict, optional): Files to send with the request
+headers (str, optional): custom headers</dd>
+<dt>Returns:</dt>
+<dd>A JSON object of the returned response if <cite>get_json</cite> is True,
+Requests&#8217; response object otherwise</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-hellosign_python_sdk.utils.utils">
+<span id="hellosign-python-sdk-utils-utils-module"></span><h2>hellosign_python_sdk.utils.utils module<a class="headerlink" href="#module-hellosign_python_sdk.utils.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="hellosign_python_sdk.utils.utils.is_email">
+<tt class="descclassname">hellosign_python_sdk.utils.utils.</tt><tt class="descname">is_email</tt><big>(</big><em>email</em><big>)</big><a class="headerlink" href="#hellosign_python_sdk.utils.utils.is_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if an email is valid</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>email (str): Email address</dd>
+<dt>Returns:</dt>
+<dd>True if email is valid, False otherwise.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-hellosign_python_sdk.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hellosign_python_sdk.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Minh Danh.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
