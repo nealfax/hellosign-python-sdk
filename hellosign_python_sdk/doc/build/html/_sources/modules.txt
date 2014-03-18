@@ -4,4 +4,4 @@
 .. toctree::
    :maxdepth: 4
 
-   hellosign-python-sdk
+   hellosign_python_sdk
