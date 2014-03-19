@@ -92,6 +92,8 @@ print sr.signature_request_id
 
 ````python
 sr_list = client.get_signature_request_list()
+
+# Print out the name of the signer's name in every signature request
 for sr in sr_list:
     print sr.signatures[0]['signer_name']
 ````
