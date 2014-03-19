@@ -59,3 +59,22 @@ Note: In case you initialize the HSClient with all the above credentials, the pr
 ````python
 client.get_account_info()
 ````
+
+The account information is then stored in `client.account`. For example, to print the `email_address` of your account:
+
+````python
+print client.account.email_address
+````
+
+#### Update your account information
+
+````python
+client.account.callback_url = "http://example.com/callback_url"
+client.update_account_info()
+````
+
+#### Create a new HelloSign account
+
+````python
+client.create_account("new_user@example.com", "aL0ngL0ngPa55w0rd")
+````
