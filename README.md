@@ -45,7 +45,6 @@ client = HSClient(api_email="api_user@example.com", api_password="your_password"
 client = HSClient(api_key="your_api_key")
 
 # Initialize HSClient using api token
-
 client = HSClient(api_accesstoken="your_api_access_token", api_accesstokentype="your_api_access_token_type")
 ````
 Note: In case you initialize the HSClient with all the above credentials, the priority order is as follow: api_accesstoken & api_accesstokentype, api_key, then api_email and api_password
@@ -76,5 +75,5 @@ client.update_account_info()
 #### Create a new HelloSign account
 
 ````python
-client.create_account("new_user@example.com", "aL0ngL0ngPa55w0rd")
+new_account = client.create_account("new_user@example.com", "aL0ngL0ngPa55w0rd")
 ````
