@@ -32,7 +32,7 @@ pip install hellosign-python-sdk
 In your application, import `HSClient`:
 
 ````python
-from hsclient import HSClient
+from hellosign_python_sdk.hsclient import HSClient
 ````
 
 Then create a HSClient object and pass authentication information to initialize it:
