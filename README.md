@@ -78,7 +78,9 @@ client.update_account_info()
 new_account = client.create_account("new_user@example.com", "aL0ngL0ngPa55w0rd")
 ````
 
+
 ### Signature Request
+
 
 #### Get a Signature Request
 
@@ -93,7 +95,22 @@ print sr.signature_request_id
 ````python
 sr_list = client.get_signature_request_list()
 
-# Print out the name of the signer's name in every signature request
+# Print out the name of the signers in every signature request
 for sr in sr_list:
     print sr.signatures[0]['signer_name']
 ````
+
+#### Send a Signature Request
+
+````python
+files = ["NDA.pdf", "AppendixA.pdf"]
+signers = [{"name": "Jack", "email_address": "jack@example.com"}, {"name": "Jill", "email_address": "jill@example.com"}]
+cc_email_addresses = ["lawyer@hellosign.com", "lawler@example.com"]
+
+# Send a signature request with uploaded files
+signature_request = client.send_signature_request(test_mode="1", files=None, file_urls=["http://www.example.com/download/sample.pdf"], title="NDA with Acme Co.", "The NDA we talked about", "Please sign this NDA and then we can discuss more. Let me know if you have any questions.", "", signers, cc_email_addresses)
+
+# Send a signature request with remote files
+signature_request = client.send_signature_request(test_mode="1", files=files, file_urls=None, title="NDA with Acme Co.", "The NDA we talked about", "Please sign this NDA and then we can discuss more. Let me know if you have any questions.", "", signers, cc_email_addresses)
+````
+

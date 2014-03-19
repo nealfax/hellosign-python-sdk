@@ -19,10 +19,10 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # client.create_account("@gmail.com", "abczyxll00348") # invalidemail
 # sr = client.get_signature_request("7bf722477992c7fe445da9b46b71fd7a53885fab")
 # print sr.requester_email_address  # o0Khoiclub0o@yahoo.com`
-sr_list = client.get_signature_request_list()
+# sr_list = client.get_signature_request_list()
 # print sr_list  # True
 # print sr_list[0]  # True
-print sr_list[0].signatures[0]['signer_name']  # True
+# print sr_list[0].signatures[0]['signer_name']  # True
 # download file
 # client.get_signature_request_file("7bf722477992c7fe445da9b46b71fd7a53885fab", "file.pdf") # file.pdf
 # client.get_signature_request_final_copy("7bf722477992c7fe445da9b46b71fd7a53885fab", "file2.pdf") # file.pdf
@@ -55,10 +55,10 @@ print sr_list[0].signatures[0]['signer_name']  # True
 # files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
 # files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf"]
 # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
-# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
-# cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
+signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
+cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
 
-# print client.send_signature_request("1", "", ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
+print client.send_signature_request("1", "", ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", files, ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", files, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", None, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses) # Error
