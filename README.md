@@ -108,9 +108,9 @@ signers = [{"name": "Jack", "email_address": "jack@example.com"}, {"name": "Jill
 cc_email_addresses = ["lawyer@hellosign.com", "lawler@example.com"]
 
 # Send a signature request with uploaded files
-signature_request = client.send_signature_request(test_mode="1", files=None, file_urls=["http://www.example.com/download/sample.pdf"], title="NDA with Acme Co.", "The NDA we talked about", "Please sign this NDA and then we can discuss more. Let me know if you have any questions.", "", signers, cc_email_addresses)
+signature_request = client.send_signature_request(test_mode="1", files=None, file_urls=["http://www.example.com/download/sample.pdf"], title="NDA with Acme Co.", subject="The NDA we talked about", message="Please sign this NDA and then we can discuss more. Let me know if you have any questions.", signing_redirect_url="", signers=signers, cc_email_addresses=cc_email_addresses)
 
 # Send a signature request with remote files
-signature_request = client.send_signature_request(test_mode="1", files=files, file_urls=None, title="NDA with Acme Co.", "The NDA we talked about", "Please sign this NDA and then we can discuss more. Let me know if you have any questions.", "", signers, cc_email_addresses)
+signature_request = client.send_signature_request(test_mode="1", files=files, file_urls=None, title="NDA with Acme Co.", subject="The NDA we talked about", message="Please sign this NDA and then we can discuss more. Let me know if you have any questions.", signing_redirect_url="", signers=signers, cc_email_addresses=cc_email_addresses)
 ````
 
