@@ -68,7 +68,7 @@ print client.account.email_address
 #### Update your account information
 
 ````python
-client.account.callback_url = "http://example.com/callback_url"
+client.account.callback_url = "https://www.example.com/callback"
 client.update_account_info()
 ````
 
@@ -76,4 +76,22 @@ client.update_account_info()
 
 ````python
 new_account = client.create_account("new_user@example.com", "aL0ngL0ngPa55w0rd")
+````
+
+### Signature Request
+
+#### Get a Signature Request
+
+````python
+sr = client.get_signature_request("fa5c8a0b0f492d768749333ad6fcc214c111e967")
+print sr.requester_email_address
+print sr.signature_request_id
+````
+
+#### Get a list of your Signature Requests
+
+````python
+sr_list = client.get_signature_request_list()
+for sr in sr_list:
+    print sr.signatures[0]['signer_name']
 ````
