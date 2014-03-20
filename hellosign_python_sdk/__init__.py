@@ -1,1 +1,1 @@
-import hellosign_python_sdk
+# import hellosign_python_sdk.hsclient
