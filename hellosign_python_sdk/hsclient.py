@@ -727,9 +727,10 @@ class HSClient(object):
 
     # RECOMMEND: no title?
     def create_unclaimed_draft(
-            self, test_mode="0", files=None, file_urls=None, draft_type=None,
-            subject=None, message=None, signers=None, cc_email_addresses=None,
-            signing_redirect_url=None, form_fields_per_document=None):
+            self, test_mode="0", client_id=None, files=None, file_urls=None,
+            draft_type=None, subject=None, message=None, signers=None,
+            cc_email_addresses=None, signing_redirect_url=None,
+            form_fields_per_document=None):
         """Creates a new Draft that can be claimed using the claim URL
 
         Creates a new Draft that can be claimed using the claim URL. The first
@@ -745,6 +746,10 @@ class HSClient(object):
             test_mode (str, optional): Whether this is a test, the signature
                 request created from this draft will not be legally binding if
                 set to 1. Defaults to 0.
+            client_id (str): Client id of the app you're using to create this
+                embedded signature request. Visit the embedded page to learn
+                more about this parameter
+                (https://www.hellosign.com/api/embedded)
             files (list of str): the uploaded file(s) to send for signature
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
@@ -803,8 +808,9 @@ class HSClient(object):
             cc_email_addresses_payload[
                 "cc_email_addresses[" + str(idx) + "]"] = cc_email_address
         payload = {
-            "test_mode": test_mode, "type": draft_type, "subject": subject,
-            "message": message, "signing_redirect_url": signing_redirect_url,
+            "test_mode": test_mode, "client_id": client_id, "type": draft_type,
+            "subject": subject, "message": message,
+            "signing_redirect_url": signing_redirect_url,
             "form_fields_per_document": form_fields_per_document}
         # removed attributes with none value
         payload = dict((key, value)

@@ -55,10 +55,10 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
 # files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf"]
 # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
-signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
-cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
+# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
+# cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
 
-print client.send_signature_request("1", "", ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
+# print client.send_signature_request("1", "", ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", files, ["http://www.ancestralauthor.com/download/sample.pdf"], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", files, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", None, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses) # Error
@@ -70,11 +70,12 @@ print client.send_signature_request("1", "", ["http://www.ancestralauthor.com/do
 # 16
 
 # files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf", "/Users/minhdanh/Downloads/Hadoop_Tuning_Guide-Version5.pdf"]
-# # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
+# files = ["/Users/minhdanh/Downloads/aws-sdk-ruby-dg.pdf"]
+# signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}]
 # signers = [{"name": "Vu Dinh Khoi", "email_address": "dinhkhoi@siliconstraits.vn"}, {"name": "Vo Anh Duy", "email_address": "anhduy@siliconstraits.vn"}, {"name": "Minh Danh", "email_address": "minhdanh@siliconstraits.vn"}]
 # cc_email_addresses = ["anhduy@siliconstraits.vn", "minhdanh@siliconstraits.vn"]
 # # TODO: use a valid client_id
-# print client.send_signature_request_embedded("1", "b6b8e7deaf8f0b95c029dca049356d4a2cf9710a", files, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
+# print client.send_signature_request_embedded("1", "6a8949c799991e12dac70cb135095680", files, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # 17 TODO: test create with reusable_form_id
 
 # Test ReusableForm
