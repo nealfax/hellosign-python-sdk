@@ -9,8 +9,8 @@ def readme():
     with open('README.md') as f:
         return f.read()
 
-setup(name='hellosign-python-sdk',
-      version='0.1.4',
+setup(name='hellosign_python_sdk',
+      version='0.1.5',
       description="An API wrapper written in Python to interact with \
             HelloSign's API (http://www.hellosign.com)",
       long_description=readme(),
