@@ -817,7 +817,7 @@ class HSClient(object):
             "form_fields_per_document": form_fields_per_document}
         url = self.UNCLAIMED_DRAFT_CREATE_URL
         if is_embedded_signing == '1':
-            payload['is_embedded_signing'] == '1'
+            payload['is_embedded_signing'] = '1'
             payload['client_id'] = client_id
             url = self.UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL
         # removed attributes with none value
