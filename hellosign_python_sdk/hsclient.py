@@ -730,6 +730,7 @@ class HSClient(object):
     # RECOMMEND: no title?
     def create_unclaimed_draft(
             self, test_mode="0", client_id=None, is_for_embedded_signing="0",
+            requester_email_address=None,
             files=None, file_urls=None, draft_type=None, subject=None,
             message=None, signers=None, cc_email_addresses=None,
             signing_redirect_url=None, form_fields_per_document=None):
@@ -753,6 +754,7 @@ class HSClient(object):
                 more about this parameter. Used for embedded unclaimed draft
                 (https://www.hellosign.com/api/embedded)
             is_for_embedded_signing (str): Used for embedded unclaimed draft
+            requester_email_address (str):
             files (list of str): the uploaded file(s) to send for signature
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
@@ -819,8 +821,9 @@ class HSClient(object):
         if is_for_embedded_signing == '1':
             payload['is_for_embedded_signing'] = '1'
             payload['client_id'] = client_id
+            payload['requester_email_address'] = requester_email_address
             url = self.UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL
-        # removed attributes with none value
+        # remove attributes with none value
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
 
@@ -969,7 +972,7 @@ class HSClient(object):
             "subject": subject, "message": message,
             "signing_redirect_url": signing_redirect_url,
             "form_fields_per_document": form_fields_per_document}
-        # removed attributes with none value
+        # remove attributes with none value
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
 
@@ -1060,7 +1063,7 @@ class HSClient(object):
             "reusable_form_id": reusable_form_id, "title": title,
             "subject": subject, "message": message,
             "signing_redirect_url": signing_redirect_url}
-        # removed attributes with empty value
+        # remove attributes with empty value
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
         request = HSRequest(self.auth)
