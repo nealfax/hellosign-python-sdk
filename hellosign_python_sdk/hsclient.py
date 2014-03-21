@@ -882,8 +882,6 @@ class HSClient(object):
         for key, value in fields.iteritems():
             # If value is a dict, one of the fields in the dict is required ->
             # exception if all are None
-            # if type(value) is 'dict':
-            #     if not any(someDict.values()):
             if not value:
                 raise HSException("Field " + key + " is required.")
         if either_fields is not None:
@@ -1051,7 +1049,7 @@ class HSClient(object):
             # cc_emaiL_address: {"email_address": "email@email.email",
             # "role_name": "Role Name"}
             ccs_payload[
-                "ccs[" + cc["role_name"] + "]"] = cc["email_address"]
+                "ccs[" + cc["role_name"] + "][email_address]"] = cc["email_address"]
         custom_fields_payload = {}
         # custom_field: {"name": value}
         for custom_field in custom_fields:

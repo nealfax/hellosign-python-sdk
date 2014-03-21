@@ -63,6 +63,21 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 # print client.send_signature_request("1", files, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses)
 # print client.send_signature_request("1", None, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses) # Error
 # 13 TODO: test create with reusable_form_id
+signers = [{'email_address': 'minhdanh@tgm.vn',
+  'name': 'Minh Danh',
+  'role_name': 'Ben Thang Cuoc'},
+ {'email_address': 'anhduy@siliconstraits.vn',
+  'name': 'Anh Duy',
+  'role_name': 'Ben Thua Cuoc'}]
+ccs = [{'email_address': '', 'role_name': 'US President'},
+ {'email_address': 'dinhkhoi@siliconstraits.vn', 'role_name': 'UN'}]
+custom_fields = [{"Client's name": 'None'}, {'He he': 'None'}]
+sr = client.send_signature_request_embedded_with_rf(test_mode = "1",
+                client_id = '6a8949c799991e12dac70cb135095680', reusable_form_id = '795d750e70f1bb2146541022bdec3b1b0ac5ae0c', title = "NDA with Acme Co.",
+                subject = "The NDA we talked about", message = "Please sign this NDA and then we" +
+                " can discuss more. Let me know if you have any questions.",
+                signing_redirect_url = "", signers = signers, ccs = ccs, custom_fields = custom_fields)
+print sr.signatures[0]["signature_id"]
 #14 reminder
 # client.remind_signature_request("ba9e7d19133c9a369ee35bafb1bb23942580994e", "minhdanh@siliconstraits.vn")
 #15 cancel
@@ -82,7 +97,7 @@ client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c
 #18
 # rl = client.get_reusable_form_list()
 # for rf in rl:
-# 	print rf.reusable_form_id
+# 	print rf.json_data
 # 19 get reusable_form_id
 # rf = client.get_reusable_form("85185eeafa15704ce7be1a9d5e911c2366f5313e")
 # print rf.reusable_form_id
