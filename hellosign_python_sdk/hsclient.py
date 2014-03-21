@@ -44,6 +44,8 @@ class HSClient(object):
     EMBEDDED_OBJECT_GET_URL = API_URL + '/embedded/sign_url/'
 
     UNCLAIMED_DRAFT_CREATE_URL = API_URL + '/unclaimed_draft/create'
+    UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = API_URL + "/unclaimed_draft/create_embedded";
+
 
     REUSABLE_FORM_GET_URL = API_URL + '/reusable_form/'
     REUSABLE_FORM_GET_LIST_URL = API_URL + '/reusable_form/list'
@@ -727,10 +729,10 @@ class HSClient(object):
 
     # RECOMMEND: no title?
     def create_unclaimed_draft(
-            self, test_mode="0", client_id=None, files=None, file_urls=None,
-            draft_type=None, subject=None, message=None, signers=None,
-            cc_email_addresses=None, signing_redirect_url=None,
-            form_fields_per_document=None):
+            self, test_mode="0", client_id=None, is_embedded_signing="0",
+            files=None, file_urls=None, draft_type=None, subject=None,
+            message=None, signers=None, cc_email_addresses=None,
+            signing_redirect_url=None, form_fields_per_document=None):
         """Creates a new Draft that can be claimed using the claim URL
 
         Creates a new Draft that can be claimed using the claim URL. The first
@@ -748,8 +750,9 @@ class HSClient(object):
                 set to 1. Defaults to 0.
             client_id (str): Client id of the app you're using to create this
                 embedded signature request. Visit the embedded page to learn
-                more about this parameter
+                more about this parameter. Used for embedded unclaimed draft
                 (https://www.hellosign.com/api/embedded)
+            is_embedded_signing (str): Used for embedded unclaimed draft
             files (list of str): the uploaded file(s) to send for signature
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
@@ -808,17 +811,22 @@ class HSClient(object):
             cc_email_addresses_payload[
                 "cc_email_addresses[" + str(idx) + "]"] = cc_email_address
         payload = {
-            "test_mode": test_mode, "client_id": client_id, "type": draft_type,
+            "test_mode": test_mode, "type": draft_type,
             "subject": subject, "message": message,
             "signing_redirect_url": signing_redirect_url,
             "form_fields_per_document": form_fields_per_document}
+        url = self.UNCLAIMED_DRAFT_CREATE_URL
+        if is_embedded_signing == '1':
+            payload['is_embedded_signing'] == '1'
+            payload['client_id'] = client_id
+            url = self.UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL
         # removed attributes with none value
         payload = dict((key, value)
                        for key, value in payload.iteritems() if value)
 
         request = HSRequest(self.auth)
         response = request.post(
-            self.UNCLAIMED_DRAFT_CREATE_URL, data=dict(
+            url, data=dict(
                 payload.items() + signers_payload.items() +
                 cc_email_addresses_payload.items() + file_urls_payload.items()),
             files=files_payload)
