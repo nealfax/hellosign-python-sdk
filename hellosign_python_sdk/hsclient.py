@@ -729,7 +729,7 @@ class HSClient(object):
 
     # RECOMMEND: no title?
     def create_unclaimed_draft(
-            self, test_mode="0", client_id=None, is_embedded_signing="0",
+            self, test_mode="0", client_id=None, is_for_embedded_signing="0",
             files=None, file_urls=None, draft_type=None, subject=None,
             message=None, signers=None, cc_email_addresses=None,
             signing_redirect_url=None, form_fields_per_document=None):
@@ -752,7 +752,7 @@ class HSClient(object):
                 embedded signature request. Visit the embedded page to learn
                 more about this parameter. Used for embedded unclaimed draft
                 (https://www.hellosign.com/api/embedded)
-            is_embedded_signing (str): Used for embedded unclaimed draft
+            is_for_embedded_signing (str): Used for embedded unclaimed draft
             files (list of str): the uploaded file(s) to send for signature
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
@@ -816,8 +816,8 @@ class HSClient(object):
             "signing_redirect_url": signing_redirect_url,
             "form_fields_per_document": form_fields_per_document}
         url = self.UNCLAIMED_DRAFT_CREATE_URL
-        if is_embedded_signing == '1':
-            payload['is_embedded_signing'] = '1'
+        if is_for_embedded_signing == '1':
+            payload['is_for_embedded_signing'] = '1'
             payload['client_id'] = client_id
             url = self.UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL
         # removed attributes with none value
