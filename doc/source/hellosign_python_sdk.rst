@@ -21,15 +21,6 @@ hellosign_python_sdk.hsclient module
     :undoc-members:
     :show-inheritance:
 
-hellosign_python_sdk.test_hsclient module
------------------------------------------
-
-.. automodule:: hellosign_python_sdk.test_hsclient
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
 Module contents
 ---------------
 
