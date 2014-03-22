@@ -4,7 +4,7 @@ from hsclient import HSClient
 
 client = HSClient(api_key="a57f10309a04482499e49782b3c0c6f43641780970c2c1d02451c74b03ece07c")
 # Account
-# client.get_account_info()
+client.get_account_info()
 # print client.account.email_address # print minhdanh@siliconstraits.vn
 # client.account.callback_url = "http://git.siliconstraits.vn"
 # client.update_account_info()

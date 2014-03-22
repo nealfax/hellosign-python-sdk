@@ -1,4 +1,5 @@
 import os
+import sys
 import requests
 from exception import *
 
@@ -49,6 +50,21 @@ class HSRequest(object):
             get_headers.update(headers)
         if parameters is not None:
             get_parameters.update(parameters)
+        print "Debug: self.headers: "
+        print self.headers
+        print "Debug: headers: "
+        print headers
+        print "Debug: get_headers: "
+        print get_headers
+
+        print "Debug: self.parameters: "
+        print self.parameters
+        print "Debug: parameters: "
+        print parameters
+        print "Debug: get_parameters: "
+        print get_parameters
+        sys.stdout.flush()
+
         response = requests.get(url, headers=get_headers, params=get_parameters,
                                 auth=self.auth)
         self.http_status_code = response.status_code
