@@ -23,7 +23,7 @@ class HSRequest(object):
 
     DEFAULT_ENCODING = "UTF-8"
     USER_AGENT = "HelloSign Java SDK"
-    parameters = {}
+    parameters = None
     headers = {'User-Agent': USER_AGENT}
     http_status_code = 0
 
