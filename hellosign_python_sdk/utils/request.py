@@ -29,6 +29,9 @@ class HSRequest(object):
 
     def __init__(self, auth):
         self.auth = auth
+        print "Debug: request __init__: self.parameters: "
+        print self.parameters
+        sys.stdout.flush()
 
     def get(self, url, headers=None, parameters=None, get_json=True):
         """Send a GET request with custome headers and parameters
