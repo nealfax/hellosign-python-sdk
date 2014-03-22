@@ -51,6 +51,8 @@ Note: In case you initialize the HSClient with all the above credentials, the pr
 
 ## Usage
 
+For more information about the API, please refer to this [link](http://hellosign-python-sdk.readthedocs.org/en/latest/)
+
 ### Account
 
 #### Get current account information
