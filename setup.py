@@ -10,7 +10,7 @@ def readme():
         return f.read()
 
 setup(name='hellosign-python-sdk',
-      version='0.2.8',
+      version='0.2.9',
       description="An API wrapper written in Python to interact with \
             HelloSign's API (http://www.hellosign.com)",
       long_description=readme(),
@@ -18,7 +18,6 @@ setup(name='hellosign-python-sdk',
       'Development Status :: 3 - Alpha',
       'License :: OSI Approved :: MIT License',
       'Programming Language :: Python :: 2.7',
-      'Topic :: Text Processing :: Linguistic',
       ],
       keywords='hellosign python sdk',
       url='https://github.com/minhdanh/hellosign-python-sdk',

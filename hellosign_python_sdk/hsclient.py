@@ -550,10 +550,8 @@ class HSClient(object):
         request = HSRequest(self.auth)
         response = request.get(
             self.REUSABLE_FORM_GET_LIST_URL, parameters={"page": page})
-        # print response
         for reusable_form in response["reusable_forms"]:
             rf_list.append(ReusableForm(reusable_form))
-            # print reusable_form
         return rf_list
 
     # RECOMMEND: this api does not fail if the user has been added...
@@ -724,12 +722,6 @@ class HSClient(object):
         """
 
         request = HSRequest(self.auth)
-        print "Debug HSClient: " + self.EMBEDDED_OBJECT_GET_URL + signature_id
-        print "Debug HSClient: request"
-        print request
-        print "Debug HSClient: request"
-        print request.parameters
-
         response = request.get(self.EMBEDDED_OBJECT_GET_URL + signature_id)
         return Embedded(response["embedded"])
 
@@ -891,7 +883,6 @@ class HSClient(object):
             if not value:
                 raise HSException("Field " + key + " is required.")
         if either_fields is not None:
-            # print either_fields
             for field in either_fields:
                 if not any(field.values()):
                     raise HSException(
@@ -949,15 +940,12 @@ class HSClient(object):
 
         files_payload = {}
         for idx, filename in enumerate(files):
-            # print filename
             files_payload["file[" + str(idx) + "]"] = open(filename, 'rb')
-        # print files_payload
         file_urls_payload = {}
         for idx, fileurl in enumerate(file_urls):
             file_urls_payload["file_url[" + str(idx) + "]"] = fileurl
         signers_payload = {}
         for idx, signer in enumerate(signers):
-            # print signer
             signers_payload["signers[" + str(idx) + "][name]"] = signer["name"]
             signers_payload["signers[" + str(idx) + "][email_address]"] = signer[
                 "email_address"]

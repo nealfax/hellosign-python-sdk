@@ -29,9 +29,6 @@ class HSRequest(object):
 
     def __init__(self, auth):
         self.auth = auth
-        print "Debug: request __init__: self.parameters: "
-        print self.parameters
-        sys.stdout.flush()
 
     def get(self, url, headers=None, parameters=None, get_json=True):
         """Send a GET request with custome headers and parameters
@@ -56,27 +53,12 @@ class HSRequest(object):
             get_headers.update(headers)
         if parameters is not None:
             get_parameters.update(parameters)
-        print "Debug: self.headers: "
-        print self.headers
-        print "Debug: headers: "
-        print headers
-        print "Debug: get_headers: "
-        print get_headers
-
-        print "Debug: self.parameters: "
-        print self.parameters
-        print "Debug: parameters: "
-        print parameters
-        print "Debug: get_parameters: "
-        print get_parameters
-        sys.stdout.flush()
 
         response = requests.get(url, headers=get_headers, params=get_parameters,
                                 auth=self.auth)
         self.http_status_code = response.status_code
         self._check_error(response)
         if get_json is True:
-            # print response.json()
             return response.json()
         return response
 
