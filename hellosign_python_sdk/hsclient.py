@@ -724,6 +724,12 @@ class HSClient(object):
         """
 
         request = HSRequest(self.auth)
+        print "Debug HSClient: " + self.EMBEDDED_OBJECT_GET_URL + signature_id
+        print "Debug HSClient: request"
+        print request
+        print "Debug HSClient: request"
+        print request.parameters
+
         response = request.get(self.EMBEDDED_OBJECT_GET_URL + signature_id)
         return Embedded(response["embedded"])
 
