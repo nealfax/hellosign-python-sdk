@@ -49,6 +49,9 @@ class HSRequest(object):
 
         get_headers = self.headers
         get_parameters = self.parameters
+        if get_parameters is None:
+            # In case self.parameters is still empty
+            get_parameters = {}
         if headers is not None:
             get_headers.update(headers)
         if parameters is not None:
