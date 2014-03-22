@@ -114,3 +114,15 @@ signature_request = client.send_signature_request(test_mode="1", files=None, fil
 signature_request = client.send_signature_request(test_mode="1", files=files, file_urls=None, title="NDA with Acme Co.", subject="The NDA we talked about", message="Please sign this NDA and then we can discuss more. Let me know if you have any questions.", signing_redirect_url="", signers=signers, cc_email_addresses=cc_email_addresses)
 ````
 
+#### Send a Signature Request with Reusable Form
+
+````python
+signers = [{"name": "Jack", "email_address": "jack@example.com"}, {"name": "Jill", "email_address": "jill@example.com"}]
+cc_email_addresses = ["lawyer@hellosign.com", "lawler@example.com"]
+ccs = [{'email_address': 'lawler@hellosign.com', 'role_name': 'Lawyer 1'},
+ {'email_address': 'lawler@example.com', 'role_name': 'Lawyer 2'}]
+custom_fields = [{"Field 1": 'Value 1'}, {'Field 2': 'Value 2'}]
+
+# Send a signature request with uploaded files
+signature_request = client.send_signature_request_with_rf(test_mode="1", reusable_form_id="fa5c8a0b0f492d768749333ad6fcc214c111e967", title="NDA with Acme Co.", subject="The NDA we talked about", message="Please sign this NDA and then we can discuss more. Let me know if you have any questions.", signing_redirect_url="", signers=signers, ccs=ccs, custom_fields=custom_fields)
+````
