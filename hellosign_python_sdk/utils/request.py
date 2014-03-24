@@ -138,9 +138,15 @@ class HSRequest(object):
         if response.status_code >= 400:
             # I intended to return False here but raising a meaningful exception
             # may make senses more.
-            raise self._check_http_error_code(response.status_code)(
-                str(response.status_code) + " error: " +
-                response.json()["error"]["error_msg"])
+            try:
+                raise self._check_http_error_code(response.status_code)(
+                    str(response.status_code) + " error: " +
+                    response.json()["error"]["error_msg"])
+            # This is to catch error when we post get oath data
+            except TypeError:
+                raise self._check_http_error_code(response.status_code)(
+                    str(response.status_code) + " error: " +
+                    response.json()["error_description"])
         # Return True if everything looks OK
         return True
 

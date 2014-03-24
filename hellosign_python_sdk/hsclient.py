@@ -58,6 +58,8 @@ class HSClient(object):
     TEAM_ADD_MEMBER_URL = API_URL + '/team/add_member'
     TEAM_REMOVE_MEMBER_URL = API_URL + '/team/remove_member'
 
+    OAUTH_TOKEN_URL = 'https://www.hellosign.com/oauth/token'
+
     def __init__(self, api_email=None, api_password=None, api_key=None,
                  api_accesstoken=None, api_accesstokentype=None):
         """Initialize the client object with authentication information to send
@@ -832,6 +834,30 @@ class HSClient(object):
                 cc_email_addresses_payload.items() + file_urls_payload.items()),
             files=files_payload)
         return UnclaimedDraft(response["unclaimed_draft"])
+
+
+    def get_oauth_data(self, code, client_id, secret, state):
+        """Get Oauth data from HelloSign
+
+        Args:
+            code (str): Code returned by HelloSign for our callback url
+            client_id (str):
+            secret (str):
+
+        Returns:
+            An HSAccessTokenAuth object
+
+        """
+        request = HSRequest(self.auth)
+        response = request.post(self.OAUTH_TOKEN_URL, {"state": state,
+                                "code": code,
+                                "grant_type": "authorization_code",
+                                "client_id": client_id, "secret": secret})
+        oauth = HSAccessTokenAuth(
+            response['access_token'],
+            response['token_type'], response['refresh_token'],
+            response['expires_in'], response['state'])
+        return oauth
 
     def _authenticate(self, api_email=None, api_password=None, api_key=None,
                       api_accesstoken=None, api_accesstokentype=None):
