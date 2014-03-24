@@ -26,6 +26,6 @@ class HSAccessTokenAuth(AuthBase):
         self.state = state
 
     def __call__(self, r):
-        r.headers['Authorization'] = self.access_token_type + \
-            ' ' + self.access_token
+        r.headers['Authorization'] = self.access_token + \
+            ' ' + self.access_token_type
         return r
