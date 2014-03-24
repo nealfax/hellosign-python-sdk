@@ -1,5 +1,7 @@
 from hellosign_python_sdk.utils.request import HSRequest
-from hellosign_python_sdk.utils.exception import *
+from hellosign_python_sdk.utils.exception import HSException, InvalidEmail
+from hellosign_python_sdk.utils.exception import EmptyPassword, NoAuthMethod
+from hellosign_python_sdk.utils.exception import HTTPError
 from hellosign_python_sdk.resource.account import Account
 from hellosign_python_sdk.resource.signature_request import SignatureRequest
 from hellosign_python_sdk.resource.reusable_form import ReusableForm
@@ -44,8 +46,8 @@ class HSClient(object):
     EMBEDDED_OBJECT_GET_URL = API_URL + '/embedded/sign_url/'
 
     UNCLAIMED_DRAFT_CREATE_URL = API_URL + '/unclaimed_draft/create'
-    UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = API_URL + "/unclaimed_draft/create_embedded";
-
+    UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = API_URL + \
+        '/unclaimed_draft/create_embedded'
 
     REUSABLE_FORM_GET_URL = API_URL + '/reusable_form/'
     REUSABLE_FORM_GET_LIST_URL = API_URL + '/reusable_form/list'
