@@ -41,8 +41,6 @@ class Resource(object):
                 return self.json_data[name]
             else:
                 raise AttributeError
-        else:
-            return self.json_data
 
     def __setattr__(self, name, value):
         if name != "json_data":
