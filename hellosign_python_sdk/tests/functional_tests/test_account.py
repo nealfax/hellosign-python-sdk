@@ -7,7 +7,7 @@ from hellosign_python_sdk.utils.exception import BadRequest, NotFound, Unauthori
 from requests.auth import HTTPBasicAuth
 
 
-class Api(TestCase):
+class TestAccount(TestCase):
 
     def setUp(self):
         self.client = HSClient(api_key=api_key)
@@ -21,11 +21,3 @@ class Api(TestCase):
         # considered successful
         account = self.client.update_account_info()
         self.assertEquals(account, True)
-
-# client.account.callback_url = "http://git.siliconstraits.vn"
-# client.update_account_info()
-
-# print client.account.callback_url # print http://git.siliconstraits.vn
-# print client.account.documents_left # print 3
-# print client.account.email_address # print minhdanh@siliconstraits.vn
-# print client.account

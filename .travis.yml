@@ -10,6 +10,6 @@ install:
 script:
   # - "python setup.py test"
   # - nosetests hellosign_python_sdk/tests
-  - nosetests --with-coverage --cover-package=hellosign_python_sdk --include=hellosign_python_sdk/tests/* --exclude=functional*
+  - nosetests --with-coverage --cover-package=hellosign_python_sdk --include=hellosign_python_sdk/tests/*
 after_success:
   - coveralls
