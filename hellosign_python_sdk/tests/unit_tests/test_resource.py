@@ -69,6 +69,8 @@ class TestException(TestCase):
             pass
         resource.json_data = {'key': 'value'}
         self.assertEquals(resource.json_data, {'key': 'value'})
+        json_data = resource.json_data
+        self.assertEquals(json_data, {'key': 'value'})
 
     # TODO: fulfill all the attributes of Reusable Form
     def test_reusable_form(self):
