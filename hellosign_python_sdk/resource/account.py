@@ -30,23 +30,3 @@ class Account(Resource):
         >>> print account.account_id
 
     """
-
-    def __getattr__(self, name):
-        """Allow to get quotas info by using .quotas.key.
-
-        Args:
-            name (str): The attribute of the quotas to get
-                If nothing found in json_data["quotas"], then we'll fallback to
-                the parent class's function which will return the attributes in
-                json_data (if any)
-
-        Returns:
-            Value of the attribute found in json_data["quotas"] or json_data
-            object.
-        """
-
-        # TODO: this doesn't work as expected, consider removing
-        if name in self.json_data["quotas"].keys():
-            return self.json_data["quotas"][name]
-        else:
-            return Resource.__getattr__(self, name)
