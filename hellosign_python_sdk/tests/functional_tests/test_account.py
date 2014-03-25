@@ -1,10 +1,7 @@
 from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
-from hellosign_python_sdk.utils.request import HSRequest
 from hellosign_python_sdk.resource.account import Account
-from hellosign_python_sdk.utils.exception import BadRequest, NotFound, Unauthorized
-from requests.auth import HTTPBasicAuth
 
 
 class TestAccount(TestCase):
@@ -17,7 +14,15 @@ class TestAccount(TestCase):
         self.assertEquals(account, True)
         self.assertEquals(isinstance(self.client.account, Account), True)
 
+        new_client = HSClient(api_key='non valid api key')
+        account = new_client.get_account_info()
+        self.assertEquals(account, False)
+
         # We update nothing, but the api returns an Account object, so it is
         # considered successful
         account = self.client.update_account_info()
         self.assertEquals(account, True)
+
+        self.client.account.callback_url = 'not valid url'
+        account = self.client.update_account_info()
+        self.assertEquals(account, False)
