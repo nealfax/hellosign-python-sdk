@@ -9,7 +9,8 @@ class TestUtils(TestCase):
         self.assertEqual(is_email("test@test.com.vn"), True)
         self.assertEqual(is_email("user_test@test.com"), True)
         self.assertEqual(is_email("user.test@test.com"), True)
-        self.assertEqual(is_email("a.little.lengthy.but.fine@dept.example.com"), True)
+        self.assertEqual(is_email("a.little.lengthy.but.fine@dept.example.com"),
+                         True)
         self.assertEqual(is_email("other.email-with-dash@example.com"), True)
         self.assertEqual(is_email("long_long_long_long_test@test.com"), True)
         self.assertEqual(is_email("@test.com"), False)
@@ -21,7 +22,9 @@ class TestUtils(TestCase):
         self.assertEqual(is_email(""), False)
         self.assertEqual(is_email("test"), False)
         self.assertEqual(is_email("A@b@c@example.com"), False)
-        self.assertEqual(is_email("a\"b(c)d,e:f;g<h>i[j\k]l@example.com"), False)
+        self.assertEqual(is_email("a\"b(c)d,e:f;g<h>i[j\k]l@example.com"),
+                         False)
         self.assertEqual(is_email("just\"not\"right@example.com"), False)
         self.assertEqual(is_email("this is\"not\\allowed@example.com"), False)
-        self.assertEqual(is_email("this\ still\"not\\allowed@example.com"), False)
+        self.assertEqual(is_email("this\ still\"not\\allowed@example.com"),
+                         False)
