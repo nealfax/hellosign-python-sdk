@@ -2,6 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.utils.request import HSRequest
+from hellosign_python_sdk.utils.exception import BadRequest
 import tempfile
 import os
 
@@ -30,6 +31,12 @@ class Api(TestCase):
         response = request.get(url='https://httpbin.org/get',
                                get_json=True)
         self.assertEquals(isinstance(response, dict), True)
+
+        try:
+            response = request.get(url='https://www.hellosign.com/oauth/token',
+                                   get_json=True)
+        except BadRequest, e:
+            self.assertEquals('400 error' in str(e), True)
 
     def test_post(self):
         request = HSRequest(self.client.auth)
