@@ -13,35 +13,66 @@ class Api(TestCase):
 
     def test_get(self):
         request = HSRequest(self.client.auth)
-        response = request.get(url='https://www.hellosign.com/',
+        response = request.get(url='http://httpbin.org/get',
                                headers={'Custom-Header': 'Nothing'},
                                parameters={'param': 'Nothing'},
                                get_json=False)
         self.assertEquals(response.status_code, 200)
-        response = request.get(url='https://github.com/timeline.json',
+        response = request.get(url='http://httpbin.org/get',
                                get_json=True)
-        # print response
-        self.assertEquals(isinstance(response, list), True)
-        self.assertEquals(isinstance(response[0], dict), True)
+        self.assertEquals(isinstance(response, dict), True)
+
+        response = request.get(url='https://httpbin.org/get',
+                               headers={'Custom-Header': 'Nothing'},
+                               parameters={'param': 'Nothing'},
+                               get_json=False)
+        self.assertEquals(response.status_code, 200)
+        response = request.get(url='https://httpbin.org/get',
+                               get_json=True)
+        self.assertEquals(isinstance(response, dict), True)
 
     def test_post(self):
         request = HSRequest(self.client.auth)
-        response = request.post(url='https://www.hellosign.com/',
-                                data={"test": "None"}, get_json=False)
+        response = request.post(url='http://httpbin.org/post',
+                                data={"test": "None"}, get_json=False,
+                                headers={'Custom-Header': 'Nothing'}
+                                )
         self.assertEquals(response.status_code, 200)
+        response = request.post(url='http://httpbin.org/post',
+                                data={"test": "None"}, get_json=True
+                                )
+        response = request.post(url='https://httpbin.org/post',
+                                data={"test": "None"}, get_json=False,
+                                headers={'Custom-Header': 'Nothing'}
+                                )
+        self.assertEquals(response.status_code, 200)
+        response = request.post(url='https://httpbin.org/post',
+                                data={"test": "None"}, get_json=True
+                                )
 
     def test_get_file(self):
         request = HSRequest(self.client.auth)
         f = tempfile.NamedTemporaryFile(delete=True)
         temp_filename = f.name
         f.close()
-        response = request.get_file(url='https://www.hellosign.com/',
+        response = request.get_file(url='http://httpbin.org/robots.txt',
                                     headers={'Custom-Header': 'Nothing'},
                                     filename=temp_filename)
-        os.unlink(f.name)
+        os.unlink(temp_filename)
         self.assertEquals(response, True)
 
-        response = request.get_file(url='https://www.hellosign.com/',
+        response = request.get_file(url='https://httpbin.org/robots.txt',
+                                    headers={'Custom-Header': 'Nothing'},
+                                    filename=temp_filename)
+        os.unlink(temp_filename)
+        self.assertEquals(response, True)
+
+        response = request.get_file(url='http://httpbin.org/robots.txt',
+                                    headers={'Custom-Header': 'Nothing'},
+                                    filename='')
+        self.assertEquals(response, False)
+
+        response = request.get_file(url='https://httpbin.org/robots.txt',
                                     headers={'Custom-Header': 'Nothing'},
                                     filename='')
         self.assertEquals(response, False)
