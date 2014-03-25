@@ -46,6 +46,30 @@ class TestException(TestCase):
         self.assertEquals(resource.custom_attribute_1, 'Value')
         self.assertEquals(resource.custom_attribute_2, False)
 
+        resource = Resource({'custom_key': {'custom_attribute_1': 'Value',
+                            'custom_attribute_2': False}}, 'custom_key')
+        self.assertEquals(resource.custom_attribute_1, 'Value')
+        self.assertEquals(resource.custom_attribute_2, False)
+
+        try:
+            resource = Resource({'custom_key': {'custom_attribute_1': 'Value',
+                                'custom_attribute_2': False}}, 'no_key')
+        except KeyError:
+            pass
+        try:
+            resource.not_existed_key
+        except AttributeError:
+            pass
+        try:
+            resource = Resource({'custom_attribute_1': 'Value',
+                                'custom_attribute_2': False})
+            resource.custom_attribute_1 = 'New Value'
+            resource.not_existed_key = 'Value'
+        except AttributeError:
+            pass
+        resource.json_data = {'key': 'value'}
+        self.assertEquals(resource.json_data, {'key': 'value'})
+
     # TODO: fulfill all the attributes of Reusable Form
     def test_reusable_form(self):
         reusable_form = ReusableForm(
