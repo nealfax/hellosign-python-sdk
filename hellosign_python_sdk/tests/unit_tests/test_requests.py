@@ -13,8 +13,16 @@ class Api(TestCase):
 
     def test_get(self):
         request = HSRequest(self.client.auth)
-        response = request.get(url='https://www.hellosign.com/', get_json=False)
+        response = request.get(url='https://www.hellosign.com/',
+                               headers={'Custom-Header': 'Nothing'},
+                               parameters={'param': 'Nothing'},
+                               get_json=False)
         self.assertEquals(response.status_code, 200)
+        response = request.get(url='https://github.com/timeline.json',
+                               get_json=True)
+        # print response
+        self.assertEquals(isinstance(response, list), True)
+        self.assertEquals(isinstance(response[0], dict), True)
 
     def test_post(self):
         request = HSRequest(self.client.auth)
@@ -28,6 +36,12 @@ class Api(TestCase):
         temp_filename = f.name
         f.close()
         response = request.get_file(url='https://www.hellosign.com/',
+                                    headers={'Custom-Header': 'Nothing'},
                                     filename=temp_filename)
         os.unlink(f.name)
         self.assertEquals(response, True)
+
+        response = request.get_file(url='https://www.hellosign.com/',
+                                    headers={'Custom-Header': 'Nothing'},
+                                    filename='')
+        self.assertEquals(response, False)
