@@ -2,7 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.resource.team import Team
-from hellosign_python_sdk.utils.exception import NotFound, HSException
+from hellosign_python_sdk.utils.exception import NotFound, HSException, InvalidEmail, Forbidden
 
 
 class TestTeam(TestCase):
@@ -11,11 +11,15 @@ class TestTeam(TestCase):
         self.client = HSClient(api_key=api_key)
 
     def test_add_team_member_with_invalid_info(self):
-        team = self.client.add_team_member(email_address="in valid email")
-        self.assertEquals(isinstance(team, Team), False)
+        try:
+            self.client.add_team_member(email_address="in valid email")
+        except InvalidEmail:
+            pass
 
-        team = self.client.add_team_member(account_id="in valid account_id")
-        self.assertEquals(isinstance(team, Team), False)
+        try:
+            self.client.add_team_member(account_id="in valid account_id")
+        except NotFound:
+            pass
 
     def test_team_functions(self):
         try:
@@ -25,12 +29,15 @@ class TestTeam(TestCase):
             team = self.client.get_team_info()
             old_team_name = team.name
 
-            result = self.client.update_team_name("New team name")
-            self.assertEquals(result, True)
-
-            team = self.client.add_team_member(
-                email_address="not_existed_user@example.com")
+            team = self.client.update_team_name("New team name")
             self.assertEquals(isinstance(team, Team), True)
+
+            try:
+                team = self.client.add_team_member(
+                    email_address="not_existed_user@example.com")
+                self.assertEquals(isinstance(team, Team), True)
+            except Forbidden:
+                    pass
             try:
                 self.client.add_team_member()
             except HSException:
@@ -40,8 +47,8 @@ class TestTeam(TestCase):
                 email_address="not_existed_user@example.com")
             self.assertEquals(isinstance(team, Team), True)
 
-            result = self.client.update_team_name(old_team_name)
-            self.assertEquals(result, True)
+            team = self.client.update_team_name(old_team_name)
+            self.assertEquals(isinstance(team, Team), True)
         except NotFound:
             # You do not belong to any teams
             # create team -> add member, remove member, destroy team
