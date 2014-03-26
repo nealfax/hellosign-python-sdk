@@ -644,16 +644,13 @@ class HSClient(object):
             name (str): The name of your Team
 
         Returns:
-            True if the Team is updated successfully, False otherwise
+            A Team object of the updated Team
 
         """
 
         request = HSRequest(self.auth)
-        try:
-            request.post(self.TEAM_UPDATE_URL, {"name": name})
-        except HTTPError:
-            return False
-        return True
+        response = request.post(self.TEAM_UPDATE_URL, {"name": name})
+        return Team(response["team"])
 
     def destroy_team(self):
         """Delete your Team
@@ -1117,6 +1114,8 @@ class HSClient(object):
 
         if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
+        elif email_address and not utils.is_email(email_address):
+            raise InvalidEmail("Email is not valid")
         request = HSRequest(self.auth)
         data = {}
         if account_id is not None:
@@ -1144,14 +1143,14 @@ class HSClient(object):
 
         if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
+        elif email_address and not utils.is_email(email_address):
+            raise InvalidEmail("Email is not valid")
         request = HSRequest(self.auth)
         data = {}
         if account_id is not None:
             data = {"account_id": account_id}
         else:
             data = {"email_address": email_address}
-        try:
-            request.post(url, data)
-        except HTTPError:
-            return False
-        return True
+
+        response = request.post(url, data)
+        return Team(response["team"])
