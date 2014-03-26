@@ -96,11 +96,11 @@ class HSClient(object):
 
         """
 
-        if email is None:
+        if not email:
             raise InvalidEmail("Email cannot be empty")
         elif not utils.is_email(email):
             raise InvalidEmail("Email is not valid")
-        if password is None:
+        if not password:
             raise EmptyPassword("Password cannot be empty")
         request = HSRequest(self.auth)
         response = request.post(self.ACCOUNT_CREATE_URL, {
@@ -1116,7 +1116,7 @@ class HSClient(object):
 
         """
 
-        if email_address is None and account_id is None:
+        if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
         data = {}
@@ -1143,7 +1143,7 @@ class HSClient(object):
 
         """
 
-        if email_address is None and account_id is None:
+        if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
         request = HSRequest(self.auth)
         data = {}
