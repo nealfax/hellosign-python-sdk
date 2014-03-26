@@ -1,0 +1,56 @@
+from unittest import TestCase
+from hellosign_python_sdk.tests.test_helper import api_key
+from hellosign_python_sdk.hsclient import HSClient
+from hellosign_python_sdk.resource.team import Team
+from hellosign_python_sdk.utils.exception import NotFound
+
+
+class TestTeam(TestCase):
+
+    def setUp(self):
+        self.client = HSClient(api_key=api_key)
+
+    def test_add_team_member_with_invalid_info(self):
+        team = self.client.add_team_member(email_address="in valid email")
+        self.assertEquals(isinstance(team, Team), False)
+
+        team = self.client.add_team_member(account_id="in valid account_id")
+        self.assertEquals(isinstance(team, Team), False)
+
+    def tet_team_functions(self):
+        try:
+            # You already in a team
+            # save your old team name -> update new team name -> add member ->
+            # remove member -> restore your old team name
+            team = self.client.get_team_info()
+            old_team_name = team.name
+
+            result = self.client.update_team_name("New team name")
+            self.assertEquals(result, True)
+
+            team = self.client.add_team_member(
+                email_address="not_existed_user@example.com")
+            self.assertEquals(isinstance(team, Team), True)
+
+            team = self.client.remove_team_member(
+                email_address="not_existed_user@example.com")
+            self.assertEquals(isinstance(team, Team), True)
+
+            result = self.client.update_team_name(old_team_name)
+            self.assertEquals(result, True)
+        except NotFound:
+            # You do not belong to any teams
+            # create team -> add member, remove member, destroy team
+            team = self.client.create_team("New team")
+            self.assertEquals(team.name, "New team")
+
+            team = self.client.add_team_member(
+                email_address="not_existed_user@example.com")
+            self.assertEquals(isinstance(team, Team), True)
+
+            team = self.client.remove_team_member(
+                email_address="not_existed_user@example.com")
+            self.assertEquals(isinstance(team, Team), True)
+
+            result = self.client.destroy_team()
+            self.assertEquals(result, True)
