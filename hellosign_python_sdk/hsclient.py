@@ -554,7 +554,7 @@ class HSClient(object):
         request = HSRequest(self.auth)
         response = request.get(
             self.REUSABLE_FORM_GET_LIST_URL, parameters={"page": page})
-        for reusable_form in response["reusable_forms"]:
+        for reusable_form in response.get("reusable_forms", []):
             rf_list.append(ReusableForm(reusable_form))
         return rf_list
 
