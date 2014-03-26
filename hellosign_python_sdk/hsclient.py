@@ -729,7 +729,6 @@ class HSClient(object):
         response = request.get(self.EMBEDDED_OBJECT_GET_URL + signature_id)
         return Embedded(response["embedded"])
 
-    # RECOMMEND: no title?
     def create_unclaimed_draft(
             self, test_mode="0", client_id=None, is_for_embedded_signing="0",
             requester_email_address=None,

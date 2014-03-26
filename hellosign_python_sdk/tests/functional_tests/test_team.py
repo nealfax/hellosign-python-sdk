@@ -2,7 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.resource.team import Team
-from hellosign_python_sdk.utils.exception import NotFound
+from hellosign_python_sdk.utils.exception import NotFound, HSException
 
 
 class TestTeam(TestCase):
@@ -17,7 +17,7 @@ class TestTeam(TestCase):
         team = self.client.add_team_member(account_id="in valid account_id")
         self.assertEquals(isinstance(team, Team), False)
 
-    def tet_team_functions(self):
+    def test_team_functions(self):
         try:
             # You already in a team
             # save your old team name -> update new team name -> add member ->
@@ -31,6 +31,10 @@ class TestTeam(TestCase):
             team = self.client.add_team_member(
                 email_address="not_existed_user@example.com")
             self.assertEquals(isinstance(team, Team), True)
+            try:
+                self.client.add_team_member()
+            except HSException:
+                pass
 
             team = self.client.remove_team_member(
                 email_address="not_existed_user@example.com")
