@@ -22,48 +22,45 @@ class HSClient(object):
     """
 
     API_VERSION = 'v3'
-    API_URL = 'https://api.hellosign.com/' + API_VERSION
+    API_URL = ''
 
-    ACCOUNT_CREATE_URL = API_URL + '/account/create'
-    ACCOUNT_INFO_URL = API_URL + '/account'
-    ACCOUNT_UPDATE_URL = API_URL + '/account'
+    ACCOUNT_CREATE_URL = ''
+    ACCOUNT_INFO_URL = ''
+    ACCOUNT_UPDATE_URL = ''
 
-    SIGNATURE_REQUEST_INFO_URL = API_URL + '/signature_request/'
-    SIGNATURE_REQUEST_LIST_URL = API_URL + '/signature_request/list'
-    SIGNATURE_REQUEST_DOWNLOAD_PDF_URL = API_URL + '/signature_request/files/'
-    SIGNATURE_REQUEST_DOWNLOAD_FINAL_COPY_URL = API_URL + \
-        '/signature_request/files/'
-    SIGNATURE_REQUEST_CREATE_URL = API_URL + '/signature_request/send'
-    SIGNATURE_REQUEST_CREATE_WITH_RF_URL = API_URL + \
-        '/signature_request/send_with_reusable_form'
-    SIGNATURE_REQUEST_REMIND_URL = API_URL + '/signature_request/remind/'
-    SIGNATURE_REQUEST_CANCEL_URL = API_URL + '/signature_request/cancel/'
-    SIGNATURE_REQUEST_CREATE_EMBEDDED_URL = API_URL + \
-        '/signature_request/create_embedded'
-    SIGNATURE_REQUEST_CREATE_EMBEDDED_WITH_RF_URL = API_URL + \
-        '/signature_request/create_embedded_with_reusable_form'
+    SIGNATURE_REQUEST_INFO_URL = ''
+    SIGNATURE_REQUEST_LIST_URL = ''
+    SIGNATURE_REQUEST_DOWNLOAD_PDF_URL = ''
+    SIGNATURE_REQUEST_DOWNLOAD_FINAL_COPY_URL = ''
+    SIGNATURE_REQUEST_CREATE_URL = ''
+    SIGNATURE_REQUEST_CREATE_WITH_RF_URL = ''
+    SIGNATURE_REQUEST_REMIND_URL = ''
+    SIGNATURE_REQUEST_CANCEL_URL = ''
+    SIGNATURE_REQUEST_CREATE_EMBEDDED_URL = ''
+    SIGNATURE_REQUEST_CREATE_EMBEDDED_WITH_RF_URL = ''
 
-    EMBEDDED_OBJECT_GET_URL = API_URL + '/embedded/sign_url/'
+    EMBEDDED_OBJECT_GET_URL = ''
 
-    UNCLAIMED_DRAFT_CREATE_URL = API_URL + '/unclaimed_draft/create'
-    UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = API_URL + \
-        '/unclaimed_draft/create_embedded'
+    UNCLAIMED_DRAFT_CREATE_URL = ''
+    UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = ''
 
-    REUSABLE_FORM_GET_URL = API_URL + '/reusable_form/'
-    REUSABLE_FORM_GET_LIST_URL = API_URL + '/reusable_form/list'
-    REUSABLE_FORM_ADD_USER_URL = API_URL + '/reusable_form/add_user/'
-    REUSABLE_FORM_REMOVE_USER_URL = API_URL + '/reusable_form/remove_user/'
+    REUSABLE_FORM_GET_URL = ''
+    REUSABLE_FORM_GET_LIST_URL = ''
+    REUSABLE_FORM_ADD_USER_URL = ''
+    REUSABLE_FORM_REMOVE_USER_URL = ''
 
-    TEAM_INFO_URL = TEAM_UPDATE_URL = API_URL + '/team'
-    TEAM_CREATE_URL = API_URL + '/team/create'
-    TEAM_DESTROY_URL = API_URL + '/team/destroy'
-    TEAM_ADD_MEMBER_URL = API_URL + '/team/add_member'
-    TEAM_REMOVE_MEMBER_URL = API_URL + '/team/remove_member'
+    TEAM_INFO_URL = ''
+    TEAM_UPDATE_URL = ''
+    TEAM_CREATE_URL = ''
+    TEAM_DESTROY_URL = ''
+    TEAM_ADD_MEMBER_URL = ''
+    TEAM_REMOVE_MEMBER_URL = ''
 
-    OAUTH_TOKEN_URL = 'https://www.hellosign.com/oauth/token'
+    OAUTH_TOKEN_URL = ''
 
     def __init__(self, api_email=None, api_password=None, api_key=None,
-                 api_accesstoken=None, api_accesstokentype=None):
+                 api_accesstoken=None, api_accesstokentype=None,
+                 env='production'):
         """Initialize the client object with authentication information to send
         requests
 
@@ -83,6 +80,63 @@ class HSClient(object):
             api_accesstokentype)
         self.account = Account()
         # self.get_account_info()
+        self._init_endpoints(env)
+
+    def _init_endpoints(self, env="production"):
+
+        API_PRODUCTION_URL = "https://api.hellosign.com"
+        API_DEV_URL = "https://www.my.hellosign.com/apiapp_dev.php"
+        API_STAGING_URL = "https://staging.hellosign.com/apiapp_dev.php"
+
+        OAUTH_TOKEN_PRODUCTION_URL = "https://www.hellosign.com/oauth/token"
+        OAUTH_TOKEN_DEV_URL = "https://www.my.hellosign.com/webapp_dev.php/oauth/token"
+        OAUTH_TOKEN_STAGING = "https://staging.hellosign.com/webapp_dev.php/oauth/token"
+
+        if env == "production":
+            self.API_URL = API_PRODUCTION_URL + '/' + self.API_VERSION
+            self.OAUTH_TOKEN_URL = OAUTH_TOKEN_PRODUCTION_URL
+        elif env == "dev":
+            self.API_URL = API_DEV_URL + '/' + self.API_VERSION
+            self.OAUTH_TOKEN_URL = OAUTH_TOKEN_DEV_URL
+        elif env == "staging":
+            self.API_URL = API_STAGING_URL + '/' + self.API_VERSION
+            self.OAUTH_TOKEN_URL = API_STAGING_URL
+
+        self.ACCOUNT_CREATE_URL = self.API_URL + '/account/create'
+        self.ACCOUNT_INFO_URL = self.API_URL + '/account'
+        self.ACCOUNT_UPDATE_URL = self.API_URL + '/account'
+
+        self.SIGNATURE_REQUEST_INFO_URL = self.API_URL + '/signature_request/'
+        self.SIGNATURE_REQUEST_LIST_URL = self.API_URL + '/signature_request/list'
+        self.SIGNATURE_REQUEST_DOWNLOAD_PDF_URL = self.API_URL + '/signature_request/files/'
+        self.SIGNATURE_REQUEST_DOWNLOAD_FINAL_COPY_URL = self.API_URL + \
+            '/signature_request/files/'
+        self.SIGNATURE_REQUEST_CREATE_URL = self.API_URL + '/signature_request/send'
+        self.SIGNATURE_REQUEST_CREATE_WITH_RF_URL = self.API_URL + \
+            '/signature_request/send_with_reusable_form'
+        self.SIGNATURE_REQUEST_REMIND_URL = self.API_URL + '/signature_request/remind/'
+        self.SIGNATURE_REQUEST_CANCEL_URL = self.API_URL + '/signature_request/cancel/'
+        self.SIGNATURE_REQUEST_CREATE_EMBEDDED_URL = self.API_URL + \
+            '/signature_request/create_embedded'
+        self.SIGNATURE_REQUEST_CREATE_EMBEDDED_WITH_RF_URL = self.API_URL + \
+            '/signature_request/create_embedded_with_reusable_form'
+
+        self.EMBEDDED_OBJECT_GET_URL = self.API_URL + '/embedded/sign_url/'
+
+        self.UNCLAIMED_DRAFT_CREATE_URL = self.API_URL + '/unclaimed_draft/create'
+        self.UNCLAIMED_DRAFT_CREATE_EMBEDDED_URL = self.API_URL + \
+            '/unclaimed_draft/create_embedded'
+
+        self.REUSABLE_FORM_GET_URL = self.API_URL + '/reusable_form/'
+        self.REUSABLE_FORM_GET_LIST_URL = self.API_URL + '/reusable_form/list'
+        self.REUSABLE_FORM_ADD_USER_URL = self.API_URL + '/reusable_form/add_user/'
+        self.REUSABLE_FORM_REMOVE_USER_URL = self.API_URL + '/reusable_form/remove_user/'
+
+        self.TEAM_INFO_URL = self.TEAM_UPDATE_URL = self.API_URL + '/team'
+        self.TEAM_CREATE_URL = self.API_URL + '/team/create'
+        self.TEAM_DESTROY_URL = self.API_URL + '/team/destroy'
+        self.TEAM_ADD_MEMBER_URL = self.API_URL + '/team/add_member'
+        self.TEAM_REMOVE_MEMBER_URL = self.API_URL + '/team/remove_member'
 
     def create_account(self, email, password):
         """Create a new account
