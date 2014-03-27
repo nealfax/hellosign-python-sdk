@@ -443,7 +443,8 @@ class HSClient(object):
         request = HSRequest(self.auth)
         try:
             request.post(
-                self.SIGNATURE_REQUEST_CANCEL_URL + signature_request_id)
+                url=self.SIGNATURE_REQUEST_CANCEL_URL + signature_request_id,
+                get_json=False)
         except HTTPError:
             return False
         return True

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from hellosign_python_sdk.tests.test_helper import api_key
+from hellosign_python_sdk.tests.test_helper import api_key, client_id
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.resource.signature_request import SignatureRequest
 from hellosign_python_sdk.utils.exception import Forbidden, HSException
@@ -51,3 +51,16 @@ class TestSignatureRequest(TestCase):
             self.client.send_signature_request("1", None, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses) # Error
         except HSException:
             pass
+        result = self.client.cancel_signature_request(sr.signature_request_id)
+        self.assertTrue(result)
+
+        # create embedded
+        sr = self.client.send_signature_request_embedded("1", client_id, files, [], "A test signature request", "Test request", "This is a demo message", "", signers, cc_email_addresses)
+
+        self.assertEquals(isinstance(sr, SignatureRequest), True)
+        self.assertEquals(sr.title, "A test signature request")
+        self.assertEquals(sr.subject, "Test request")
+        self.assertEquals(sr.message, "This is a demo message")
+
+        result = self.client.cancel_signature_request(sr.signature_request_id)
+        self.assertTrue(result)
