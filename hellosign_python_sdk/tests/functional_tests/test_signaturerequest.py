@@ -1,7 +1,7 @@
 from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
-from hellosign_python_sdk.resource.signaturerequest import SignatureRequest
+from hellosign_python_sdk.resource.signature_request import SignatureRequest
 import tempfile
 
 
@@ -18,7 +18,8 @@ class TestSignatureRequest(TestCase):
             sr = self.client.get_signature_request(srl[0].signature_request_id)
             self.assertTrue(isinstance(sr, SignatureRequest))
             # Remind
-            new_sr = self.client.remind_signature_request(srl[0].signature_request_id, "demo@example.com")
+            signer = srl[0].signatures[0]['signer_email_address']
+            new_sr = self.client.remind_signature_request(srl[0].signature_request_id, signer)
             self.assertEquals(isinstance(new_sr, SignatureRequest), True)
             # Download
             f = tempfile.NamedTemporaryFile(delete=True)
