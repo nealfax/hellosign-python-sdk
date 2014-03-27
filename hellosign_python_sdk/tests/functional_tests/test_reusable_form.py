@@ -32,25 +32,25 @@ class TestReusableForm(TestCase):
                 self.assertEquals(team.name, "Team Name")
                 create_team = True
             try:
-                new_team = self.client.add_team_member("test_user_hs@example.com")
+                new_team = self.client.add_team_member("not_exsited_user@example.com")
                 self.assertTrue(isinstance(new_team, Team))
                 print [account["email_address"] for account in team.accounts]
-                self.assertTrue("test_user_hs@example" in [account["email_address"] for account in team.accounts])
-                if "test_user_hs@example" in [account["email_address"] for account in team.accounts]:
+                self.assertTrue("not_exsited_user@example" in [account["email_address"] for account in team.accounts])
+                if "not_exsited_user@example" in [account["email_address"] for account in team.accounts]:
                     rf = self.client.get_reusable_form(rfl[0].reusable_form_id)
                     self.assertTrue(isinstance(rf, ReusableForm))
 
                     rf = self.client.add_user_to_reusable_form(
-                        rfl[0].reusable_form_id, None, "test_user_hs@example.com")
+                        rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
                     self.assertTrue(isinstance(rf, ReusableForm))
 
                     rf = self.client.remove_user_from_reusable_form(
-                        rfl[0].reusable_form_id, None, "test_user_hs@example.com")
+                        rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
                     self.assertTrue(isinstance(rf, ReusableForm))
 
-                new_team = self.client.remove_team_member("test_user_hs@example.com")
+                new_team = self.client.remove_team_member("not_exsited_user@example.com")
                 self.assertTrue(isinstance(team, Team))
-                self.assertFalse("test_user_hs@example" in [account["email_address"] for account in team.accounts])
+                self.assertFalse("not_exsited_user@example" in [account["email_address"] for account in team.accounts])
 
             except Forbidden:
                 pass
