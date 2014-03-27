@@ -41,17 +41,16 @@ class TestReusableForm(TestCase):
                 # This account is already on your team
                 pass
             self.assertTrue("not_exsited_user@example.com" in [account["email_address"].encode('UTF8') for account in team.accounts])
-            if "not_exsited_user@example.com" in [account["email_address"].encode('UTF8') for account in team.accounts]:
-                rf = self.client.get_reusable_form(rfl[0].reusable_form_id)
-                self.assertTrue(isinstance(rf, ReusableForm))
+            rf = self.client.get_reusable_form(rfl[0].reusable_form_id)
+            self.assertTrue(isinstance(rf, ReusableForm))
 
-                rf = self.client.add_user_to_reusable_form(
-                    rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
-                self.assertTrue(isinstance(rf, ReusableForm))
+            rf = self.client.add_user_to_reusable_form(
+                rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
+            self.assertTrue(isinstance(rf, ReusableForm))
 
-                rf = self.client.remove_user_from_reusable_form(
-                    rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
-                self.assertTrue(isinstance(rf, ReusableForm))
+            rf = self.client.remove_user_from_reusable_form(
+                rfl[0].reusable_form_id, None, "not_exsited_user@example.com")
+            self.assertTrue(isinstance(rf, ReusableForm))
 
             new_team = self.client.remove_team_member("not_exsited_user@example.com")
             self.assertTrue(isinstance(team, Team))
