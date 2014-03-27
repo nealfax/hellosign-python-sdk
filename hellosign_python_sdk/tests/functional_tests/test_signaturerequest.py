@@ -2,8 +2,9 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.resource.signature_request import SignatureRequest
-from hellosign_python_sdk.utils.exception import Forbidden
+from hellosign_python_sdk.utils.exception import Forbidden, HSException
 import tempfile
+import os
 
 
 class TestSignatureRequest(TestCase):
@@ -11,7 +12,7 @@ class TestSignatureRequest(TestCase):
     def setUp(self):
         self.client = HSClient(api_key=api_key)
 
-    def test_signature_request(self):
+    def test_signature_request_get(self):
         srl = self.client.get_signature_request_list()
         self.assertTrue(isinstance(srl, list))
         if len(srl) > 0:
@@ -34,3 +35,19 @@ class TestSignatureRequest(TestCase):
 
             result = self.client.get_signature_request_final_copy(srl[0].signature_request_id, temp_filename)
             self.assertTrue(result)
+
+    def test_signature_request_send(self):
+        files = [os.path.dirname(os.path.realpath(__file__)) + "/docs/nda.pdf"]
+        signers = [{"name": "Signer Name", "email_address": "demo@example.com"}]
+        cc_email_addresses = ["demo1@example.com", "demo2@example.com"]
+
+        sr = self.client.send_signature_request("1", files, [], "A test signature request", "Test request", "This is a demo message", "", signers, cc_email_addresses)
+        self.assertEquals(isinstance(sr, SignatureRequest), True)
+        self.assertEquals(sr.title, "A test signature request")
+        self.assertEquals(sr.subject, "Test request")
+        self.assertEquals(sr.message, "This is a demo message")
+
+        try:
+            self.client.send_signature_request("1", None, [], "Test create signature request", "Ky giay no", "Ky vao giay no di, le di", "", signers, cc_email_addresses) # Error
+        except HSException:
+            pass
