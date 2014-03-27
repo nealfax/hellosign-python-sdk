@@ -2,6 +2,7 @@ from unittest import TestCase
 from hellosign_python_sdk.tests.test_helper import api_key
 from hellosign_python_sdk.hsclient import HSClient
 from hellosign_python_sdk.resource.signature_request import SignatureRequest
+from hellosign_python_sdk.utils.exception import Forbidden
 import tempfile
 
 
@@ -19,8 +20,11 @@ class TestSignatureRequest(TestCase):
             self.assertTrue(isinstance(sr, SignatureRequest))
             # Remind
             signer = srl[0].signatures[0]['signer_email_address']
-            new_sr = self.client.remind_signature_request(srl[0].signature_request_id, signer)
-            self.assertEquals(isinstance(new_sr, SignatureRequest), True)
+            try:
+                new_sr = self.client.remind_signature_request(srl[0].signature_request_id, signer)
+                self.assertEquals(isinstance(new_sr, SignatureRequest), True)
+            except Forbidden:
+                pass
             # Download
             f = tempfile.NamedTemporaryFile(delete=True)
             temp_filename = f.name
