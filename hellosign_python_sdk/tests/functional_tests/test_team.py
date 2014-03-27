@@ -29,6 +29,12 @@ class TestTeam(TestCase):
             team = self.client.get_team_info()
             old_team_name = team.name
 
+            result = self.client.destroy_team()
+            self.assertTrue(result)
+
+            team = self.client.create_team(old_team_name)
+            self.assertEquals(team, old_team_name)
+
             team = self.client.update_team_name("New team name")
             self.assertEquals(isinstance(team, Team), True)
 
