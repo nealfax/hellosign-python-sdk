@@ -720,7 +720,7 @@ class HSClient(object):
 
         request = HSRequest(self.auth)
         try:
-            request.post(self.TEAM_DESTROY_URL)
+            request.post(url=self.TEAM_DESTROY_URL, get_json=False)
         except HTTPError:
             return False
         return True
