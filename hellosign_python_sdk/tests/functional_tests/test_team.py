@@ -29,8 +29,11 @@ class TestTeam(TestCase):
             team = self.client.get_team_info()
             old_team_name = team.name
 
-            result = self.client.destroy_team()
-            self.assertTrue(result)
+            try:
+                result = self.client.destroy_team()
+                self.assertTrue(result)
+            except NotFound:
+                pass
 
             team = self.client.create_team(old_team_name)
             self.assertEquals(team, old_team_name)
