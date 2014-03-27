@@ -36,7 +36,7 @@ class TestTeam(TestCase):
                 pass
 
             team = self.client.create_team(old_team_name)
-            self.assertEquals(team, old_team_name)
+            self.assertEquals(team.name, old_team_name)
 
             team = self.client.update_team_name("New team name")
             self.assertEquals(isinstance(team, Team), True)
