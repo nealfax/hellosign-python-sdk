@@ -7,7 +7,6 @@ Subpackages
 .. toctree::
 
     hellosign_python_sdk.resource
-    hellosign_python_sdk.tests
     hellosign_python_sdk.utils
 
 Submodules

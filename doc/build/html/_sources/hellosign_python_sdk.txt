@@ -7,7 +7,6 @@ Subpackages
 .. toctree::
 
     hellosign_python_sdk.resource
-    hellosign_python_sdk.tests
     hellosign_python_sdk.utils
 
 Submodules
@@ -20,15 +19,6 @@ hellosign_python_sdk.hsclient module
     :members:
     :undoc-members:
     :show-inheritance:
-
-hellosign_python_sdk.test_hsclient module
------------------------------------------
-
-.. automodule:: hellosign_python_sdk.test_hsclient
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------
