@@ -7,17 +7,22 @@ class Account(Resource):
 
     Attributes:
         account_id (str): The id of the Account
+
         email_address (str): The email address associated with the Account
+
         is_paid_hs (bool) : If the user has a paid HelloSign license will
-            return true
+        return true
+
         is_paid_hf (bool): If the user has a paid HelloFax license will return
-            true
+        true
+
         quotas (dict) : An object detailing remaining monthly quotas, which has
             the following attributes:
-
             templates_left (int): API templates remaining
             api_signature_requests_left (int): API signature requests remaining
+
         callback_url (str): The URL that HelloSign events will be POSTed to
+
         role_code (str): The membership role for the team. O = Owner, M = Member
 
     Examples:
