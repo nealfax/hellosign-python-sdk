@@ -802,10 +802,12 @@ class HSClient(object):
             test_mode (str, optional): Whether this is a test, the signature
                 request created from this draft will not be legally binding if
                 set to 1. Defaults to 0.
+
             client_id (str): Client id of the app you're using to create this
                 embedded signature request. Visit the embedded page to learn
                 more about this parameter. Used for embedded unclaimed draft
                 (https://www.hellosign.com/api/embedded)
+
             is_for_embedded_signing (str): Used for embedded unclaimed draft
             requester_email_address (str):
             files (list of str): the uploaded file(s) to send for signature
