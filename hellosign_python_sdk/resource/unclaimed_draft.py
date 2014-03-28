@@ -12,8 +12,10 @@ class UnclaimedDraft(Resource):
     Comprises the following attributes:
 
         claim_url (str): The URL to be used to claim this UnclaimedDraft
+
         signing_redirect_url (str): The URL you want signers redirected to
             after they successfully sign.
+
         test_mode (bool): Whether this is a test draft. Signature requests
             made from test drafts have no legal value. Defaults to 0.
 

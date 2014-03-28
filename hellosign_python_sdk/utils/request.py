@@ -69,8 +69,10 @@ class HSRequest(object):
 
         Args:
             url (str): URL to send the request to
+
             filename (str): File name to save the file as, this can be either
                 a full path or a relative path
+
             headers (str, optional): custom headers
 
         Returns:

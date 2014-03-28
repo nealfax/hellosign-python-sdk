@@ -810,18 +810,24 @@ class HSClient(object):
 
             is_for_embedded_signing (str): Used for embedded unclaimed draft
             requester_email_address (str):
+
             files (list of str): the uploaded file(s) to send for signature
+
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
+
             type (str): The type of unclaimed draft to create. Use
                 "send_document" to create a claimable file, and
                 "request_signature" for a claimable signature request. If the
                 type is "request_signature" then signers name and email_address
                 are not optional.
+
             subject (str, optional): The subject in the email that will be sent
                 to the signers
+
             message (str, optional): The custom message in the email that will
                 be sent to the signers
+
             signers (list of dict): A list of signers, which each has the
                 following attributes:
 
@@ -829,10 +835,13 @@ class HSClient(object):
                 email_address (str): email address of the signer
                 order (str, optional): The order the signer is required to sign
                     in
+
             cc_email_addresses (list of str, optional): A list of email
                 addresses that should be CCed
+
             signing_redirect_url (str, optional): The URL you want the signer
                 redirected to after they successfully sign.
+
             form_fields_per_document (str): The fields that should appear on the
                 document, expressed as a serialized JSON data structure which is
                 a list of lists of the form fields. Please refer to the API
@@ -981,21 +990,29 @@ class HSClient(object):
         Args:
             test_mode (str, optional): Whether this is a test, the signature
                 request will not be legally binding if set to 1. Defaults to 0.
+
             client_id (str): Client id of the app you're using to create this
                 embedded signature request. Visit the embedded page to learn
                 more about this parameter
                 (https://www.hellosign.com/api/embedded)
+
             files (list of str): the uploaded file(s) to send for signature
+
             file_urls (list of str): urls of the file for HelloSign to download
                 to send for signature. Use either `files` or `file_urls`
+
             title (str, optional): The title you want to assign to the
                 SignatureRequest
+
             subject (str, optional): The subject in the email that will be sent
                 to the signers
+
             message (str, optional): The custom message in the email that will
                 be sent to the signers
+
             signing_redirect_url (str, optional): The URL you want the signer
                 redirected to after they successfully sign.
+
             signers (list of dict): A list of signers, which each has the
                 following attributes:
 
@@ -1006,8 +1023,10 @@ class HSClient(object):
                 pin (str, optional): The 4-digit code that will secure this
                     signer's signature page. You must have a business plan to
                     use this feature
+
             cc_email_addresses (list of str, optional): A list of email
                 addresses that should be CCed
+
             form_fields_per_document (str): The fields that should appear on the
                 document, expressed as a serialized JSON data structure which is
                 a list of lists of the form fields. Please refer to the API
@@ -1071,20 +1090,27 @@ class HSClient(object):
         Args:
             test_mode (str, optional): Whether this is a test, the signature
                 request will not be legally binding if set to 1. Defaults to 0.
+
             client_id (str): Client id of the app you're using to create this
                 embedded signature request. Visit the embedded page to learn
                 more about this parameter
                 (https://www.hellosign.com/api/embedded)
+
             reusable_form_id (str): The id of the ReusableForm to use when
                 creating the SignatureRequest.
+
             title (str, optional): The title you want to assign to the
                 SignatureRequest
+
             subject (str, optional): The subject in the email that will be sent
                 to the signers
+
             message (str, optional): The custom message in the email that will
                 be sent to the signers
+
             signing_redirect_url (str, optional): The URL you want the signer
                 redirected to after they successfully sign.
+
             signers (list of dict): A list of signers, which each has the
                 following attributes:
 
@@ -1093,6 +1119,7 @@ class HSClient(object):
                 pin (str, optional): The 4-digit code that will secure this
                     signer's signature page. You must have a business plan to
                     use this feature
+
             ccs (list of str, optional): The email address of the CC filling the
                 role of RoleName. Required when a CC role exists for the
                 ReusableForm. Each dict has the following attributes:
