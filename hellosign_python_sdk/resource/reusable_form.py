@@ -19,17 +19,15 @@ class ReusableForm(Resource):
         ReusableForm.
             name (str): The name of the Role
             order (int): If signer order is assigned this is the 0-based index
-                for this role
+            for this role
 
         cc_roles (list of dict): An array of the designated CC roles that must
-            be specified when sending a SignatureRequest using this
-            ReusableForm.
-
+        be specified when sending a SignatureRequest using this
+        ReusableForm.
             name (str): The name of the Role
 
         documents (list of dict): An array describing each document associated
-            with this ReusableForm. Includes form field data for each document.
-
+        with this ReusableForm. Includes form field data for each document.
             name (str): Name of the associated file
             index (int): Document ordering, the lowest index is diplayed first
                 and the highest last
