@@ -5,8 +5,7 @@ class Account(Resource):
 
     """Contains information about an account and its settings.
 
-    Here are the attributes of an account::
-
+    Attributes:
         account_id (str): The id of the Account
         email_address (str): The email address associated with the Account
         is_paid_hs (bool) : If the user has a paid HelloSign license will
