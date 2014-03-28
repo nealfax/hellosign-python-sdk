@@ -3,6 +3,7 @@ import json
 
 
 class Resource(object):
+
     """An abstract class to represent some objects used by our SDK such as
     Account, ReusableForm, SignatureRequest, Team, UnclaimedDraft, Embedded.
     These objects share the same way of storing data.

@@ -4,21 +4,19 @@ from resource import Resource
 class ReusableForm(Resource):
     """Contains information about the templates you and your team have created
 
-    Comprises the following attributes:
-
+    Attributes:
         reusable_form_id (str): The id of the ReusableForm
 
         title (str): The title of the ReusableForm which will also be the
-            default subject of the message sent to signers when using this
-            ReusableForm to send a SignatureRequest.
+        default subject of the message sent to signers when using this
+        ReusableForm to send a SignatureRequest.
 
         message (str): The default message that will be sent to signers when
-            using this ReusableForm to send a SignatureRequest.
+        using this ReusableForm to send a SignatureRequest.
 
         signer_roles (list of dict): An array of the designated signer roles
-            that must be specified when sending a SignatureRequest using this
-            ReusableForm.
-
+        that must be specified when sending a SignatureRequest using this
+        ReusableForm.
             name (str): The name of the Role
             order (int): If signer order is assigned this is the 0-based index
                 for this role

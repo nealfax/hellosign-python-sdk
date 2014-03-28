@@ -7,7 +7,7 @@ class Embedded(Resource):
 
     Attributes:
         sign_url (str): URL of the signature page to display in the embedded
-            iFrame
+        iFrame
 
         expires_at (str): When the link expires
 

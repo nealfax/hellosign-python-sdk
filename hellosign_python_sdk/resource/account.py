@@ -17,9 +17,9 @@ class Account(Resource):
         true
 
         quotas (dict) : An object detailing remaining monthly quotas, which has
-            the following attributes:
-            templates_left (int): API templates remaining
-            api_signature_requests_left (int): API signature requests remaining
+        the following attributes:
+        templates_left (int): API templates remaining
+        api_signature_requests_left (int): API signature requests remaining
 
         callback_url (str): The URL that HelloSign events will be POSTed to
 
