@@ -1,6 +1,5 @@
 from hellosign.utils.request import HSRequest
-from hellosign.utils.exception import HSException, InvalidEmail
-from hellosign.utils.exception import EmptyPassword, NoAuthMethod
+from hellosign.utils.exception import HSException, NoAuthMethod
 from hellosign.utils.exception import HTTPError
 from hellosign.resource.account import Account
 from hellosign.resource.signature_request import SignatureRequest
@@ -9,7 +8,6 @@ from hellosign.resource.team import Team
 from hellosign.resource.embedded import Embedded
 from hellosign.resource.unclaimed_draft import UnclaimedDraft
 from hellosign.utils.hsaccesstokenauth import HSAccessTokenAuth
-import hellosign.utils.utils as utils
 from requests.auth import HTTPBasicAuth
 
 
@@ -150,12 +148,6 @@ class HSClient(object):
 
         """
 
-        if not email:
-            raise InvalidEmail("Email cannot be empty")
-        elif not utils.is_email(email):
-            raise InvalidEmail("Email is not valid")
-        if not password:
-            raise EmptyPassword("Password cannot be empty")
         request = HSRequest(self.auth)
         response = request.post(self.ACCOUNT_CREATE_URL, {
                                 'email_address': email, 'password': password})
@@ -1227,8 +1219,7 @@ class HSClient(object):
 
         if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
-        elif email_address and not utils.is_email(email_address):
-            raise InvalidEmail("Email is not valid")
+
         request = HSRequest(self.auth)
         data = {}
         if account_id is not None:
@@ -1257,8 +1248,7 @@ class HSClient(object):
 
         if not email_address and not account_id:
             raise HSException("No email address or account_id specified")
-        elif email_address and not utils.is_email(email_address):
-            raise InvalidEmail("Email is not valid")
+
         request = HSRequest(self.auth)
         data = {}
         if account_id is not None:

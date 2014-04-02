@@ -2,7 +2,7 @@ from unittest import TestCase
 from hellosign.tests.test_helper import api_key
 from hellosign.hsclient import HSClient
 from hellosign.resource.account import Account
-from hellosign.utils.exception import InvalidEmail, EmptyPassword
+from hellosign.utils.exception import BadRequest
 
 
 class TestAccount(TestCase):
@@ -35,13 +35,13 @@ class TestAccount(TestCase):
         try:
             self.client.create_account("not valid email@example.com",
                                        "password")
-        except InvalidEmail:
+        except BadRequest:
             pass
         try:
             self.client.create_account("", "password")
-        except InvalidEmail:
+        except BadRequest:
             pass
         try:
             self.client.create_account("email@example.com", "")
-        except EmptyPassword:
+        except BadRequest:
             pass

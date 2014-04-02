@@ -2,7 +2,7 @@ from unittest import TestCase
 from hellosign.tests.test_helper import api_key
 from hellosign.hsclient import HSClient
 from hellosign.resource.team import Team
-from hellosign.utils.exception import NotFound, HSException, InvalidEmail, Forbidden
+from hellosign.utils.exception import NotFound, HSException, BadRequest, Forbidden
 
 
 class TestTeam(TestCase):
@@ -13,7 +13,7 @@ class TestTeam(TestCase):
     def test_add_team_member_with_invalid_info(self):
         try:
             self.client.add_team_member(email_address="in valid email")
-        except InvalidEmail:
+        except BadRequest:
             pass
 
         try:
