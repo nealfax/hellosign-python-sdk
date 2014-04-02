@@ -2,7 +2,7 @@ from setuptools import setup
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),
-                                'hellosign_python_sdk'))
+                                'hellosign'))
 
 
 def readme():
@@ -25,9 +25,9 @@ setup(name='hellosign-python-sdk',
       author_email='minhdanh@siliconstraits.vn',
       license='MIT',
       packages=[
-        'hellosign_python_sdk',
-        'hellosign_python_sdk.utils',
-        'hellosign_python_sdk.resource',
+        'hellosign',
+        'hellosign.utils',
+        'hellosign.resource',
         ],
       install_requires=[
       'requests'
