@@ -1,5 +1,5 @@
 from unittest import TestCase
-from hellosign_python_sdk.utils.utils import *
+from hellosign.utils.utils import *
 
 
 class TestUtils(TestCase):

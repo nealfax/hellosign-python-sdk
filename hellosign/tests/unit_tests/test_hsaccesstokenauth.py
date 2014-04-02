@@ -1,6 +1,6 @@
 from unittest import TestCase
-from hellosign_python_sdk.utils.hsaccesstokenauth import HSAccessTokenAuth
-from hellosign_python_sdk.utils.request import HSRequest
+from hellosign.utils.hsaccesstokenauth import HSAccessTokenAuth
+from hellosign.utils.request import HSRequest
 
 
 class TestHSAccessTokenAuth(TestCase):
