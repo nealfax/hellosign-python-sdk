@@ -91,11 +91,3 @@ class ServiceUnavailable(HTTPError):
 
 class GatewayTimeout(HTTPError):
     """docstring for GatewayTimeout"""
-
-
-class InvalidEmail(HSException):
-    """Exception when an email address is invalid"""
-
-
-class EmptyPassword(HSException):
-    """Exception when a password is empty"""
