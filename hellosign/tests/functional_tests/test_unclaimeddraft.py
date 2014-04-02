@@ -1,6 +1,6 @@
 from unittest import TestCase
 from hellosign.tests.test_helper import api_key, client_id
-from hellosign.hsclient import HSClient
+from hellosign import HSClient
 from hellosign.resource.unclaimed_draft import UnclaimedDraft
 import os
 

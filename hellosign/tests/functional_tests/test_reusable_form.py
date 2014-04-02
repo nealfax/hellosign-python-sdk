@@ -1,6 +1,6 @@
 from unittest import TestCase
 from hellosign.tests.test_helper import api_key
-from hellosign.hsclient import HSClient
+from hellosign import HSClient
 from hellosign.resource.team import Team
 from hellosign.resource.reusable_form import ReusableForm
 from hellosign.utils.exception import Forbidden, NotFound

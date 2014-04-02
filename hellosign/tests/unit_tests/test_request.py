@@ -1,6 +1,6 @@
 from unittest import TestCase
 from hellosign.tests.test_helper import api_key
-from hellosign.hsclient import HSClient
+from hellosign import HSClient
 from hellosign.utils.request import HSRequest
 from hellosign.utils.exception import BadRequest
 import tempfile
