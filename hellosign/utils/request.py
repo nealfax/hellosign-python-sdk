@@ -21,16 +21,16 @@ class HSRequest(object):
     """
 
     DEFAULT_ENCODING = "UTF-8"
-    USER_AGENT = "HelloSign Java SDK"
+    USER_AGENT = "HelloSign Python SDK"
     parameters = None
     headers = {'User-Agent': USER_AGENT}
     http_status_code = 0
-    disable_verify_ssl = False
+    verify_ssl = True
 
     def __init__(self, auth, env="production"):
         self.auth = auth
         if env == "dev" or env == "staging":
-            self.disable_verify_ssl = True
+            self.verify_ssl = False
 
     def get(self, url, headers=None, parameters=None, get_json=True):
         """Send a GET request with custome headers and parameters
@@ -57,7 +57,7 @@ class HSRequest(object):
             get_parameters.update(parameters)
 
         response = requests.get(url, headers=get_headers, params=get_parameters,
-                                auth=self.auth, verify=self.disable_verify_ssl)
+                                auth=self.auth, verify=self.verify_ssl)
         self.http_status_code = response.status_code
         self._check_error(response)
         if get_json is True:
@@ -85,7 +85,7 @@ class HSRequest(object):
         if headers is not None:
             get_headers.update(headers)
         response = requests.get(url, headers=get_headers, auth=self.auth,
-                                verify=self.disable_verify_ssl)
+                                verify=self.verify_ssl)
         self.http_status_code = response.status_code
         try:
             self._check_error(response)
@@ -116,7 +116,7 @@ class HSRequest(object):
             post_headers.update(headers)
         response = requests.post(url, headers=post_headers, data=data,
                                  auth=self.auth, files=files,
-                                 verify=self.disable_verify_ssl)
+                                 verify=self.verify_ssl)
         self.http_status_code = response.status_code
         self._check_error(response)
         if get_json is True:
