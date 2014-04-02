@@ -54,3 +54,4 @@ docs/_build/
 
 venv
 test_hsclient.py
+/tests/test_helper.py
