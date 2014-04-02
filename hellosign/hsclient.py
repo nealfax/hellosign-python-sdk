@@ -56,26 +56,26 @@ class HSClient(object):
 
     OAUTH_TOKEN_URL = ''
 
-    def __init__(self, api_email=None, api_password=None, api_key=None,
-                 api_accesstoken=None, api_accesstokentype=None,
+    def __init__(self, email=None, password=None, api_key=None,
+                 access_token=None, access_token_type="Bearer",
                  env='production'):
         """Initialize the client object with authentication information to send
         requests
 
         Args:
-            api_email (str): E-mail of the account to make the requests
-            api_password (str): Password of the account used with email address
+            email (str): E-mail of the account to make the requests
+            password (str): Password of the account used with email address
             api_key (str): API Key. You can find your API key in
              https://www.hellosign.com/home/myAccount/current_tab/integrations
-            api_accesstoken (str):
-            api_accesstokentype (str):
+            access_token (str):
+            access_token_type (str):
 
         """
 
         super(HSClient, self).__init__()
         self.auth = self._authenticate(
-            api_email, api_password, api_key, api_accesstoken,
-            api_accesstokentype)
+            email, password, api_key, access_token,
+            access_token_type)
         self.account = Account()
         # self.get_account_info()
         self._init_endpoints(env)
@@ -916,7 +916,6 @@ class HSClient(object):
             files=files_payload)
         return UnclaimedDraft(response["unclaimed_draft"])
 
-
     def get_oauth_data(self, code, client_id, secret, state):
         """Get Oauth data from HelloSign
 
@@ -940,19 +939,19 @@ class HSClient(object):
             response['expires_in'], response['state'])
         return oauth
 
-    def _authenticate(self, api_email=None, api_password=None, api_key=None,
-                      api_accesstoken=None, api_accesstokentype=None):
+    def _authenticate(self, email=None, password=None, api_key=None,
+                      access_token=None, access_token_type=None):
         """Create authentication object to send requests
 
         Args:
-            api_email (str): E-mail of the account to make the requests
+            email (str): E-mail of the account to make the requests
 
-            api_password (str): Password of the account used with email address
+            password (str): Password of the account used with email address
 
             api_key (str): API Key. You can find your API key in
              https://www.hellosign.com/home/myAccount/current_tab/integrations
-            api_accesstoken (str):
-            api_accesstokentype (str):
+            access_token (str):
+            access_token_type (str):
 
         Raises:
             NoAuthMethod: If no authentication information found
@@ -962,12 +961,12 @@ class HSClient(object):
 
         """
 
-        if api_accesstokentype and api_accesstoken:
-            return HSAccessTokenAuth(api_accesstokentype, api_accesstoken)
+        if access_token_type and access_token:
+            return HSAccessTokenAuth(access_token_type, access_token)
         elif api_key:
             return HTTPBasicAuth(api_key, '')
-        elif api_email and api_password:
-            return HTTPBasicAuth(api_email, api_password)
+        elif email and password:
+            return HTTPBasicAuth(email, password)
         else:
             raise NoAuthMethod("No authentication information found!")
 
