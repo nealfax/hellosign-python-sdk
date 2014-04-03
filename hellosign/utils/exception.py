@@ -6,11 +6,12 @@ class HSException(Exception):
 
     """
 
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, message):
+        self.message = message
+        self.type = self.__class__.__name__
 
     def __str__(self):
-        return self.value
+        return self.message
 
 
 class NoAuthMethod(HSException):
@@ -19,6 +20,10 @@ class NoAuthMethod(HSException):
 
 class HTTPError(HSException):
     """Exception when an HTTP error found"""
+
+    def __init__(self, message, http_code=None):
+        super(HTTPError, self).__init__(message)
+        self.http_code = http_code
 
 
 class BadRequest(HTTPError):

@@ -147,12 +147,12 @@ class HSRequest(object):
             try:
                 raise self._check_http_error_code(response.status_code)(
                     str(response.status_code) + " error: " +
-                    response.json()["error"]["error_msg"])
+                    response.json()["error"]["error_msg"], response.status_code)
             # This is to catch error when we post get oath data
             except TypeError:
                 raise self._check_http_error_code(response.status_code)(
                     str(response.status_code) + " error: " +
-                    response.json()["error_description"])
+                    response.json()["error_description"], response.status_code)
         # Return True if everything looks OK
         return True
 
