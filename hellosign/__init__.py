@@ -1,2 +1,2 @@
-#from .hsclient import HSClient
-#__all__ = [HSClient]
+from .hsclient import HSClient
+__all__ = [HSClient]
