@@ -92,7 +92,8 @@ class TestException(TestCase):
     # TODO: fulfill attributes
     def test_signature_request(self):
         sn = SignatureRequest(
-            {'test_mode': '0', 'signature_request_id': 123456789,
+            {
+            'test_mode': '0', 'signature_request_id': 123456789,
              'requester_email_address': 'user@example.com', 'title': 'Test',
              'subject': 'Test subject', 'message': 'Test message',
              'is_complete': False, 'has_error': False,
@@ -109,7 +110,8 @@ class TestException(TestCase):
                      'type': 'text'},
                     {'api_id': 99999998, 'signature_id': 88888887,
                      'name': 'Field name 2', 'value': 'Field value 2',
-                     'type': 'text'}]})
+                     'type': 'text'}]
+            })
         self.assertEquals(sn.test_mode, '0')
         self.assertEquals(sn.signature_request_id, 123456789)
         self.assertEquals(sn.requester_email_address, 'user@example.com')

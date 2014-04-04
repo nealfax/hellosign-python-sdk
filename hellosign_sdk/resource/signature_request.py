@@ -102,7 +102,7 @@ class SignatureRequest(Resource):
                 load the data of `jsonstr[key]` instead of the whole `jsonstr`
         """
         super(SignatureRequest, self).__init__(jsonstr, key)
-        if isinstance(self.signatures, list):
+        if 'signatures' in self.json_data:
             signature_list = []
             for signature in self.signatures:
                 signature_list.append(Signature(signature))

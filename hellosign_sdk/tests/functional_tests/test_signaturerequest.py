@@ -20,7 +20,7 @@ class TestSignatureRequest(TestCase):
             sr = self.client.get_signature_request(srl[0].signature_request_id)
             self.assertTrue(isinstance(sr, SignatureRequest))
             # Remind
-            signer = srl[0].signatures[0]['signer_email_address']
+            signer = srl[0].signatures[0].signer_email_address
             try:
                 new_sr = self.client.remind_signature_request(srl[0].signature_request_id, signer)
                 self.assertEquals(isinstance(new_sr, SignatureRequest), True)
