@@ -54,4 +54,4 @@ docs/_build/
 
 venv
 test_hsclient.py
-hellosign/tests/test_helper.py
+hellosign_sdk/tests/test_helper.py

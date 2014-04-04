@@ -2,13 +2,13 @@ language: python
 python:
 - '2.7'
 before_install:
-- cp hellosign/tests/test_helper.sample.py hellosign/tests/test_helper.py
-- rm hellosign/tests/test_helper.sample.py
+- cp hellosign_sdk/tests/test_helper.sample.py hellosign_sdk/tests/test_helper.py
+- rm hellosign_sdk/tests/test_helper.sample.py
 install:
 - pip install -e . --use-mirrors
 - pip install -r test_requirements.txt --use-mirrors
 script:
-  - nosetests --with-coverage --cover-package=hellosign --include=hellosign/tests/unit_tests/* --include=hellosign/tests/functional_tests/*
+  - nosetests --with-coverage --cover-package=hellosign_sdk --include=hellosign_sdk/tests/unit_tests/* --include=hellosign_sdk/tests/functional_tests/*
 after_success:
 - coveralls
 env:

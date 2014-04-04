@@ -2,7 +2,7 @@ from setuptools import setup
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__),
-                                'hellosign'))
+                                'hellosign_sdk'))
 
 
 def readme():
@@ -10,7 +10,7 @@ def readme():
         return f.read()
 
 setup(name='hellosign-python-sdk',
-      version='0.3.6',
+      version='0.3.7',
       description="An API wrapper written in Python to interact with \
             HelloSign's API (http://www.hellosign.com)",
       long_description=readme(),
@@ -25,9 +25,9 @@ setup(name='hellosign-python-sdk',
       author_email='minhdanh@siliconstraits.vn',
       license='MIT',
       packages=[
-        'hellosign',
-        'hellosign.utils',
-        'hellosign.resource',
+        'hellosign_sdk',
+        'hellosign_sdk.utils',
+        'hellosign_sdk.resource',
         ],
       install_requires=[
       'requests'

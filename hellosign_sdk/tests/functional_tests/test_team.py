@@ -1,8 +1,8 @@
 from unittest import TestCase
-from hellosign.tests.test_helper import api_key
-from hellosign.hsclient import HSClient
-from hellosign.resource.team import Team
-from hellosign.utils.exception import NotFound, HSException, BadRequest, Forbidden
+from hellosign_sdk.tests.test_helper import api_key
+from hellosign_sdk.hsclient import HSClient
+from hellosign_sdk.resource.team import Team
+from hellosign_sdk.utils.exception import NotFound, HSException, BadRequest, Forbidden
 
 
 class TestTeam(TestCase):
